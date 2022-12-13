@@ -32,10 +32,11 @@ namespace ERP.Web.Controllers
             {
             _db.Departments.Add(dpt);
             _db.SaveChanges();
+                TempData["success"] = "Department created successfully";
             return RedirectToAction("Index");
 
             }
-
+            TempData["error"] = "Something were wrong creating the Department";
             return View(dpt);
         }
 
@@ -61,10 +62,11 @@ namespace ERP.Web.Controllers
             {
                 _db.Departments.Update(dpt);
                 _db.SaveChanges();
+                TempData["success"] = "Department updated successfully";
                 return RedirectToAction("Index");
 
             }
-
+            TempData["error"] = "Something were wrong editing the Department";
             return View(dpt);
         }
 
@@ -94,7 +96,8 @@ namespace ERP.Web.Controllers
 
                 _db.Departments.Remove(dpt);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+            TempData["success"] = "Department deleted successfully";
+            return RedirectToAction("Index");
 
         }
     }
