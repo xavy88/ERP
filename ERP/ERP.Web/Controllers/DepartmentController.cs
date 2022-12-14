@@ -1,5 +1,5 @@
-﻿using ERP.Web.Data;
-using ERP.Web.Models;
+﻿using ERP.DataAccess.Data;
+using ERP.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP.Web.Controllers

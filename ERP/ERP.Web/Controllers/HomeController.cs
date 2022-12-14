@@ -1,4 +1,4 @@
-﻿using ERP.Web.Models;
+﻿using ERP.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

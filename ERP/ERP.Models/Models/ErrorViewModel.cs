@@ -1,4 +1,4 @@
-namespace ERP.Web.Models
+namespace ERP.Models.Models
 {
     public class ErrorViewModel
     {

@@ -1,4 +1,4 @@
-using ERP.Web.Data;
+using ERP.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

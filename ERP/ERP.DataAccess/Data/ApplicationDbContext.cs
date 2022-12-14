@@ -1,7 +1,7 @@
-﻿using ERP.Web.Models;
+﻿using ERP.Models.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ERP.Web.Data
+namespace ERP.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
