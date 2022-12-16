@@ -15,6 +15,7 @@ namespace ERP.DataAccess.Repository
         {
             _db = db;
             Department = new DepartmentRepository(_db);
+            JobPosition = new JobPositionRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
