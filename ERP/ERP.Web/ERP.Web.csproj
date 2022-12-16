@@ -21,4 +21,11 @@
     <ProjectReference Include="..\ERP.DataAccess\ERP.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Client\Controllers\" />
+    <Folder Include="Areas\Employee\Controllers\" />
+    <Folder Include="Areas\HR\Controllers\" />
+    <Folder Include="Areas\Manager\Controllers\" />
+  </ItemGroup>
+
 </Project>

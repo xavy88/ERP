@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Department>
 @{
     ViewData["Title"] = "Departments List";
+    
 }
 
 <div class="container p-3">
@@ -31,11 +32,11 @@
                         <td width="20%">
                             @if (@obj.Active)
                             {
-                                <img src="./img/ok.png" width:15px; height=15px;>
+                                <img src="~/img/ok.png" width:15px; height=15px;>
                             }
                             else
                             {
-                                <img src="./img/delete.png" width:15px; height=15px;>
+                                <img src="~/img/delete.png" width:15px; height=15px;>
                             }
                         </td>
                      <td>
