@@ -12,5 +12,6 @@ namespace ERP.DataAccess.Data
         }
 
         public DbSet<Department> Departments { get; set; }
+        public DbSet<JobPosition> JobPositions { get; set; }
     }
 }

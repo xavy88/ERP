@@ -9,6 +9,7 @@ namespace ERP.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         IDepartmentRepository Department { get;}
+        IJobPositionRepository JobPosition { get; }
         void Save();
     }
 }
