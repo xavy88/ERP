@@ -1,4 +1,5 @@
 ﻿using ERP.DataAccess.Data;
+using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +8,15 @@ namespace ERP.Web.Controllers
     public class DepartmentController : Controller
     {
 
-        private readonly ApplicationDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentController(ApplicationDbContext db)
+        public DepartmentController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            IEnumerable<Department> objDepartmentList = _db.Departments;
+            IEnumerable<Department> objDepartmentList = _unitOfWork.Department.GetAll();
             return View(objDepartmentList);
         }
 
@@ -30,8 +31,8 @@ namespace ERP.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-            _db.Departments.Add(dpt);
-            _db.SaveChanges();
+            _unitOfWork.Department.Add(dpt);
+            _unitOfWork.Save();
                 TempData["success"] = "Department created successfully";
             return RedirectToAction("Index");
 
@@ -46,7 +47,7 @@ namespace ERP.Web.Controllers
             {
                 return NotFound();
             }
-            Department dpt = _db.Departments.FirstOrDefault(d =>d.Id == id);
+            Department dpt = _unitOfWork.Department.GetFirstOrDefault(d =>d.Id == id);
             if (dpt == null)
             {
                 return NotFound();
@@ -60,8 +61,8 @@ namespace ERP.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Departments.Update(dpt);
-                _db.SaveChanges();
+                _unitOfWork.Department.Update(dpt);
+                _unitOfWork.Save();
                 TempData["success"] = "Department updated successfully";
                 return RedirectToAction("Index");
 
@@ -76,7 +77,7 @@ namespace ERP.Web.Controllers
             {
                 return NotFound();
             }
-            Department dpt = _db.Departments.FirstOrDefault(d => d.Id == id);
+            Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
             if (dpt == null)
             {
                 return NotFound();
@@ -88,14 +89,14 @@ namespace ERP.Web.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            Department dpt = _db.Departments.FirstOrDefault(d => d.Id == id);
+            Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
             if (dpt == null)
             {
                 return NotFound();
             }
 
-                _db.Departments.Remove(dpt);
-                _db.SaveChanges();
+                _unitOfWork.Department.Remove(dpt);
+                _unitOfWork.Save();
             TempData["success"] = "Department deleted successfully";
             return RedirectToAction("Index");
 
