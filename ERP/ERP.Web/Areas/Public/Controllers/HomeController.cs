@@ -1,4 +1,5 @@
 ﻿using ERP.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,8 +18,13 @@ namespace ERP.Web.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult AccessDenied()
         {
             return View();
         }

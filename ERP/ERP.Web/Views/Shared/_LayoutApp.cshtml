@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
     
 <head>
@@ -41,10 +45,29 @@
             alt="User picture">
         </div>
         <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name"><i class="bi bi-person-circle"></i>
+            <strong>@UserManager.GetUserName(User)</strong>
           </span>
-          <span class="user-role">Administrator</span>
+          @if(User.IsInRole("Admin"))
+          {
+            <span class="user-role">Administrator</span>
+          }
+          @if(User.IsInRole("Employee"))
+          {
+            <span class="user-role">Employee</span>
+          }
+          @if(User.IsInRole("Manager"))
+          {
+            <span class="user-role">Manager</span>
+          }
+          @if(User.IsInRole("Client"))
+          {
+            <span class="user-role">Client</span>
+          }
+          @if(User.IsInRole("HR"))
+          {
+            <span class="user-role">HR</span>
+          }
           <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
