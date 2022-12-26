@@ -153,7 +153,7 @@ h4 {
                 </br>
                 <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                <input asp-for="Email" type="text" id="userName" class="form-control input-sm chat-input" placeholder="username"/>
+                <input autofocus asp-for="Email" type="text" id="userName" class="form-control input-sm chat-input" placeholder="username"/>
                 </br></br>
                 <input asp-for="Password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password"/>
                 </br></br>

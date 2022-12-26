@@ -1,0 +1,86 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+@{
+    var title = "Create Role";
+}
+<style>
+    .card-registration .select-input.form-control {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    input.form-control, textarea.form-control-lg {
+        border-color: #ce8035;
+    }
+</style>
+
+<section class="h-100 bg-white">
+    <div class="container <!--py-5--> h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+
+                        <div class="col-xl-6">
+                            <form asp-action="Upsert" method="post">
+                                @if(Model!=null && !string.IsNullOrEmpty(Model.Id))
+                                {
+                                    title = "Edit Role";
+                                    <input asp-for="@Model.Id" hidden>
+                                }
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-gear-fill"></i> @title</h3>
+
+                                    <div class="row">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="Id" class="form-label">Id</label>
+                                            <input readonly asp-for="Id" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="Name" class="form-label">Name</label>
+                                            <input autofocus asp-for="Name" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                            @if (Model != null && !string.IsNullOrEmpty(Model.Id))
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-info btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Create</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    @{
+<partial name="_ValidationScriptsPartial" />
+}
+}
