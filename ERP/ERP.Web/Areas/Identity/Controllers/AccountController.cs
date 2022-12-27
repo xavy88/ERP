@@ -4,6 +4,7 @@ using ERP.Web.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ERP.Web.Areas.Identity.Controllers
 {
@@ -241,6 +242,81 @@ namespace ERP.Web.Areas.Identity.Controllers
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ExternalLogin(string provider, string returnurl = null)
+        {
+            //request a redirect to the external login provider
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { returnurl = returnurl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback(string returnurl = null, string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
+                return View(nameof(Login));
+            }
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            //Sign in the user with this external login provider, id the user already has a login
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+            if (result.Succeeded)
+            {
+                //update any authentication tokens
+
+                await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
+                return LocalRedirect(returnurl);
+            }
+            else
+            {
+                //if the user does not have account, the we eill ask the user to create an acount
+                ViewData["ReturnUrl"] = returnurl;
+                ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+                return View("ExternalLogingConfirmation", new ExternalLoginConfirmationViewModel { Email = email, Name = name });
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnurl = null)
+        {
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                //get the info about the user from the external login provider
+                var info = await _signInManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("Error");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
+                var result = await _userManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await _userManager.AddLoginAsync(user, info);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
+                        return LocalRedirect(returnurl);
+                    }
+                }
+                AddErrors(result);
+            }
+            ViewData["ReturnUrl"] = returnurl;
+            return View(model);
         }
 
         private void AddErrors(IdentityResult result)

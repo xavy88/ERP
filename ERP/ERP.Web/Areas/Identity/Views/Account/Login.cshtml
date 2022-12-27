@@ -1,4 +1,6 @@
 ﻿@using ERP.Models.Models.VM
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
 @model LoginViewModel
 
 @{ Layout = null; }
@@ -172,16 +174,36 @@ h4 {
                   <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0 text-muted"></p>
             </div>
-  
-            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+            </form>
+                        @{
+                            var schemes = await signInManager.GetExternalAuthenticationSchemesAsync();
+                            var loginProviders = schemes.ToList();
+                        }
+                        @if(loginProviders.Count >0)
+                        {
+            @*<a class="btn btn-primary btn-lg btn-block" style="background-color: #3F7FE8" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]"
               role="button">
-              <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-            </a>
-                </form>
+              <i class="fab fa-facebook-f me-2"></i>Continue with Google
+                                </a>*@
+                            <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in loginProviders)
+                                        {
+                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" style="background-color: #3F7FE8"
+                                            title="Log in using your @provider.Name account">
+                                                @provider.Name
+                                            </button>
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    
+                </div>
             </div>
         </div>
-    </div>
-    </br></br></br>
+        </br></br></br>
    
     <!--footer-->
      <!--
