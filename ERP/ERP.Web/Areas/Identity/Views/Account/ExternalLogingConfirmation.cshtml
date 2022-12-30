@@ -17,9 +17,9 @@
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register Associating with your @ViewData["ProviderDisplayName"] account</p>
-                <p>You've succesfully authentocated with <strong>@ViewData["ProviderDisplayName"]</strong>
+                <!--<p>You've succesfully authentocated with <strong>@ViewData["ProviderDisplayName"]</strong>
                     Please enter an user name for this site below and click the register button to finish    
-                </p>
+                </p>-->
                 <form asp-action="ExternalLoginConfirmation" class="mx-1 mx-md-4" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                   <div class="d-flex flex-row align-items-center mb-4">

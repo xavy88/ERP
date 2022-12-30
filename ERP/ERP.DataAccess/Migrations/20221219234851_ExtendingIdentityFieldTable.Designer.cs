@@ -217,7 +217,7 @@ namespace ERP.DataAccess.Migrations
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
-                    b.UseTphMappingStrategy();
+                  //  b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
