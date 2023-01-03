@@ -16,10 +16,11 @@ namespace ERP.DataAccess.Repository
             _db = db;
             Department = new DepartmentRepository(_db);
             JobPosition = new JobPositionRepository(_db);
+            Employee = new EmployeeRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
-
+        public IEmployeeRepository Employee { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -45,14 +46,17 @@ namespace ERP.Models.Models
         [Display(Name="Report To")]
         public string ReportTo { get; set; }
         [Display(Name="Photo")]
+        [ValidateNever]
         public string ImageUrl { get; set; }
         [Required]
         public int JobPosistionId { get; set; }
         [ForeignKey("JobPosistionId")]
+        [ValidateNever]
         public JobPosition jobPosition { get; set; }
         [Required]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
+        [ValidateNever]
         public Department Department { get; set; }
 
         public string CreatedBy { get; set; }
