@@ -23,37 +23,46 @@
             <div class="col">
                 <div class="card card-registration my-4">
                     <div class="row g-0">
-                        <div class="col-xl-6 d-none d-xl-block">
+                        @*<div class="col-xl-3 d-none d-xl-block">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
                                  alt="Sample photo" class="img-fluid"
                                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
-                        </div>
+                        </div>*@
 
-                        <div class="col-xl-6">
+                        <div class="col-xl-12">
                             <form asp-action="Delete" method="post" enctype="multipart/form-data">
                                 <input asp-for="Employee.Id" hidden />
                                 <input asp-for="Employee.ImageUrl"  hidden />
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-people-fill"></i> @(Model.Employee.Id!=0?"Update":"Create") Employee</h3>
+                                    <h3 class="mb-5 text-uppercase text-danger"><i class="bi bi-person-x-fill"></i>  Delete Employee</h3>
 
                                     <div class="row">
                                         <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Name" class="form-label">Name</label>
                                             <input disabled autofocus asp-for="Employee.Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.BirthDay" class="form-label">Bithdate</label>
                                             <input disabled asp-for="Employee.BirthDay" type="date" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.SSN" class="form-label">Social Security Number</label>
                                             <input disabled asp-for="Employee.SSN" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.IdentificationId" class="form-label">Identification ID</label>
                                             <input disabled asp-for="Employee.IdentificationId" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Gender" class="form-label">Gender</label>
                                              <select disabled asp-for="Employee.Gender" id="form3Example10" class="form-select form-select-lg">
@@ -62,6 +71,8 @@
                                                 <option value="Female">Female</option> 
                                             </select>
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.MaritalStatus" class="form-label">Marital Status</label>
                                              <select disabled asp-for="Employee.MaritalStatus" id="form3Example10" class="form-select form-select-lg">
@@ -73,85 +84,117 @@
                                                 <option value="Widowed">Widowed</option>
                                             </select>
                                         </div>
+                                        </div>
+                                          <div class="col-md-12 mb-12">
                                          <div class="form-outline mb-4">
                                             <label asp-for="Employee.Address" class="form-label">Address</label>
                                             <textarea disabled asp-for="Employee.Address" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.MobilePhone" class="form-label">Mobile Phone</label>
                                             <input disabled  asp-for="Employee.MobilePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.HomePhone" class="form-label">Home Phone</label>
                                             <input disabled asp-for="Employee.HomePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.WorkEmail" class="form-label">Work Email</label>
                                             <input disabled asp-for="Employee.WorkEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.PersonalEmail" class="form-label">Personal Email</label>
                                             <input disabled  asp-for="Employee.PersonalEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
                                         <div class="form-outline mb-4 bg-warning"><span class="text-info form-label">In Case of Emergency</span></div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.ContactName" class="form-label">Name</label>
                                             <input disabled asp-for="Employee.ContactName" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Relationship" class="form-label">Relationship</label>
                                             <input disabled  asp-for="Employee.Relationship" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Phone" class="form-label">Phone</label>
                                             <input disabled asp-for="Employee.Phone" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Email" class="form-label">Email</label>
                                             <input disabled asp-for="Employee.Email" type="email" id="form3Example1m" class="form-control form-control-lg" />
                                         </div>
-                                        <div class="form-outline mb-4">
+                                        </div>
+                                          <div class="col-md-12 mb-4">
+                                            <div class="form-outline mb-4">
                                             <label asp-for="Employee.AddressContact" class="form-label">Address Contact</label>
                                             <textarea disabled asp-for="Employee.AddressContact" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.PayAmount" class="form-label">Pay Amount</label>
-                                            <input disabled asp-for="Employee.PayAmount" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                            </div>
+                                            </div>
+                                           <div class="col-md-6 mb-4">
+                                                <div class="form-outline mb-4">
+                                                <label asp-for="Employee.PayAmount" class="form-label">Pay Amount</label>
+                                                <input disabled asp-for="Employee.PayAmount" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                 </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.ReportTo" class="form-label">Report To:</label>
-                                            <input disabled asp-for="Employee.ReportTo" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                          <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.ReportTo" class="form-label">Report To:</label>
+                                                <input disabled asp-for="Employee.ReportTo" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                            </div>
                                         </div>
+                                          <div class="col-md-6 mb-4">
                                          <div class="form-outline mb-4">
                                             <label asp-for="Employee.ImageUrl" class="form-label">Report To:</label>
                                             <input disabled asp-for="Employee.ImageUrl" type="file" name="file" id="uploadBox" class="form-control form-control-lg" />
                                         </div>
+                                        </div>
+                                          <div class="col-md-6 mb-4">
                                          <div class="form-outline mb-4">
                                             <label asp-for="Employee.DepartmentId" class="form-label">Department</label>
                                              <select disabled asp-for="Employee.DepartmentId" asp-items="@Model.DepartmenList" id="form3Example10" class="form-select form-select-lg">
                                                 <option disabled selected>--- Select a Department ---</option>    
                                             </select>
                                         </div>
+                                        </div>
+                                         <div class="col-md-6 mb-4">
                                          <div class="form-outline mb-4">
                                             <label asp-for="Employee.JobPosistionId" class="form-label">Job Position</label>
                                              <select disabled asp-for="Employee.JobPosistionId" asp-items="@Model.JobPositionList" id="form3Example10" class="form-select form-select-lg">
                                                 <option disabled selected>--- Select a Job Position ---</option>    
                                             </select>
                                         </div>
+                                        </div>
                                         @if(@Model.Employee.ImageUrl==null)
                                             {
-                                                 <div class="form-outline mb-4">
-                                                    <img src="~/img/Profile.png" alt="Pending Select Employee Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                 <div class="form-outline col-md-5 mb-4 offset-1">
+                                                    <img src="~/img/Profile.png" alt="Pending Select Employee Image" height="80%" width="50%" style="border-radius:5px; border:1px solid #bbb9b9" />
                                                 </div>
                                             }
                                             else
                                             {
-                                                <div class="form-outline mb-4">
-                                                    <img src="@Model.Employee.ImageUrl" alt="Employee Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                <div class="form-outline col-md-5 mb-4 offset-1">
+                                                    <img src="@Model.Employee.ImageUrl" alt="Employee Image" height="80%" width="50%" style="border-radius:5px; border:1px solid #bbb9b9" />
                                                 </div>
                                             }
                                         </div>
                                         <div class="row">
-                                        </div>
+                                       
                                         <div class="d-flex justify-content-end pt-3">
                                             <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
                                            <button type="submit" class="btn btn-danger btn-lg ms-2 form-control"><i class="bi bi-person-x-fill"></i>  Delete</button>
@@ -165,5 +208,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>

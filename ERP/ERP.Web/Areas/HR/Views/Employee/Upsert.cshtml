@@ -18,18 +18,18 @@
 </style>
 
 <section class="h-100 bg-white">
-    <div class="container <!--py-5--> h-100">
+    @*<div class="container <!--py-5--> h-100">*@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 <div class="card card-registration my-4">
                     <div class="row g-0">
-                        <div class="col-xl-6 d-none d-xl-block">
+                       @* <div class="col-xl-6 d-none d-xl-block">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
                                  alt="Sample photo" class="img-fluid"
                                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
-                        </div>
+                        </div>*@
 
-                        <div class="col-xl-6">
+                        <div class="col-xl-12">
                             <form asp-action="Upsert" method="post" enctype="multipart/form-data">
                                 <input asp-for="Employee.Id" hidden />
                                 <input asp-for="Employee.ImageUrl"  hidden />
@@ -43,30 +43,38 @@
                                             <input autofocus asp-for="Employee.Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                             <span asp-validation-for="Employee.Name" class="text-danger"></span>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.BirthDay" class="form-label">Bithdate</label>
-                                            <input asp-for="Employee.BirthDay" type="date" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.BirthDay" class="text-danger"></span>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.BirthDay" class="form-label">Bithdate</label>
+                                                <input asp-for="Employee.BirthDay" type="date" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.BirthDay" class="text-danger"></span>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.SSN" class="form-label">Social Security Number</label>
+                                                <input asp-for="Employee.SSN" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.SSN" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.SSN" class="form-label">Social Security Number</label>
-                                            <input asp-for="Employee.SSN" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.SSN" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.IdentificationId" class="form-label">Identification ID</label>
-                                            <input asp-for="Employee.IdentificationId" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.IdentificationId" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.Gender" class="form-label">Gender</label>
-                                             <select asp-for="Employee.Gender" id="form3Example10" class="form-select form-select-lg">
-                                                <option disabled selected>--- Select a Gender ---</option>    
-                                                <option value="Male">Male</option>    
-                                                <option value="Female">Female</option> 
-                                            </select>
-                                            <span asp-validation-for="Employee.Gender" class="text-danger"></span>
-                                        </div>
+                                         <div class="col-md-8 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.IdentificationId" class="form-label">Identification ID</label>
+                                                <input asp-for="Employee.IdentificationId" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.IdentificationId" class="text-danger"></span>
+                                            </div>  
+                                         </div>
+                                         <div class="col-md-4 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.Gender" class="form-label">Gender</label>
+                                                 <select asp-for="Employee.Gender" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Gender ---</option>    
+                                                    <option value="Male">Male</option>    
+                                                    <option value="Female">Female</option> 
+                                                </select>
+                                                <span asp-validation-for="Employee.Gender" class="text-danger"></span>
+                                            </div>
+                                         </div>
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.MaritalStatus" class="form-label">Marital Status</label>
                                              <select asp-for="Employee.MaritalStatus" id="form3Example10" class="form-select form-select-lg">
@@ -85,92 +93,120 @@
                                             <span asp-validation-for="Employee.Address" class="text-danger"></span>
 
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.MobilePhone" class="form-label">Mobile Phone</label>
-                                            <input  asp-for="Employee.MobilePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.MobilePhone" class="text-danger"></span>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.MobilePhone" class="form-label">Mobile Phone</label>
+                                                <input  asp-for="Employee.MobilePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.MobilePhone" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.HomePhone" class="form-label">Home Phone</label>
-                                            <input asp-for="Employee.HomePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.HomePhone" class="text-danger"></span>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.HomePhone" class="form-label">Home Phone</label>
+                                                <input asp-for="Employee.HomePhone" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.HomePhone" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.WorkEmail" class="form-label">Work Email</label>
-                                            <input asp-for="Employee.WorkEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.WorkEmail" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.PersonalEmail" class="form-label">Personal Email</label>
-                                            <input  asp-for="Employee.PersonalEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.PersonalEmail" class="text-danger"></span>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.WorkEmail" class="form-label">Work Email</label>
+                                                <input asp-for="Employee.WorkEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.WorkEmail" class="text-danger"></span>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.PersonalEmail" class="form-label">Personal Email</label>
+                                                <input  asp-for="Employee.PersonalEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.PersonalEmail" class="text-danger"></span>
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-4 bg-warning"><span class="text-info form-label">In Case of Emergency</span></div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.ContactName" class="form-label">Name</label>
-                                            <input asp-for="Employee.ContactName" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.ContactName" class="text-danger"></span>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.ContactName" class="form-label">Name</label>
+                                                <input asp-for="Employee.ContactName" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.ContactName" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.Relationship" class="form-label">Relationship</label>
-                                            <input  asp-for="Employee.Relationship" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.Relationship" class="text-danger"></span>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.Relationship" class="form-label">Relationship</label>
+                                                <input  asp-for="Employee.Relationship" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.Relationship" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.Phone" class="form-label">Phone</label>
-                                            <input asp-for="Employee.Phone" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.Phone" class="form-label">Phone</label>
+                                                <input asp-for="Employee.Phone" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.Email" class="form-label">Email</label>
-                                            <input asp-for="Employee.Email" type="email" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.Email" class="text-danger"></span>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.Email" class="form-label">Email</label>
+                                                <input asp-for="Employee.Email" type="email" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.Email" class="text-danger"></span>
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.AddressContact" class="form-label">Address Contact</label>
                                             <textarea asp-for="Employee.AddressContact" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
                                             <span asp-validation-for="Employee.AddressContact" class="text-danger"></span>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.PayAmount" class="form-label">Pay Amount</label>
-                                            <input asp-for="Employee.PayAmount" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.PayAmount" class="text-danger"></span>
                                         </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.ReportTo" class="form-label">Report To:</label>
-                                            <input asp-for="Employee.ReportTo" type="text" id="form3Example1m" class="form-control form-control-lg" />
-                                            <span asp-validation-for="Employee.ReportTo" class="text-danger"></span>
+                                        <div class="form-outline mb-4 bg-warning"><hr /></div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.PayAmount" class="form-label">Pay Amount</label>
+                                                <input asp-for="Employee.PayAmount" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.PayAmount" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                         <div class="form-outline mb-4">
-                                            <label asp-for="Employee.ImageUrl" class="form-label">Report To:</label>
-                                            <input asp-for="Employee.ImageUrl" type="file" name="file" id="uploadBox" class="form-control form-control-lg" />
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="Employee.ReportTo" class="form-label">Report To:</label>
+                                                <input asp-for="Employee.ReportTo" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="Employee.ReportTo" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                         <div class="form-outline mb-4">
-                                            <label asp-for="Employee.DepartmentId" class="form-label">Department</label>
-                                             <select asp-for="Employee.DepartmentId" asp-items="@Model.DepartmenList" id="form3Example10" class="form-select form-select-lg">
-                                                <option disabled selected>--- Select a Department ---</option>    
-                                            </select>
-                                            <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+                                            <div class="col-md-6 mb-4">
+                                                 <div class="form-outline mb-4">
+                                                    <label asp-for="Employee.ImageUrl" class="form-label">Photo</label>
+                                                    <input asp-for="Employee.ImageUrl" type="file" name="file" id="uploadBox" class="form-control form-control-lg" />
+                                                </div>
+                                            </div>
+                                        <div class="col-md-6 mb-4">
+                                             <div class="form-outline mb-4">
+                                                <label asp-for="Employee.DepartmentId" class="form-label">Department</label>
+                                                 <select asp-for="Employee.DepartmentId" asp-items="@Model.DepartmenList" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Department ---</option>    
+                                                </select>
+                                                <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                         <div class="form-outline mb-4">
-                                            <label asp-for="Employee.JobPosistionId" class="form-label">Job Position</label>
-                                             <select asp-for="Employee.JobPosistionId" asp-items="@Model.JobPositionList" id="form3Example10" class="form-select form-select-lg">
-                                                <option disabled selected>--- Select a Job Position ---</option>    
-                                            </select>
-                                            <span asp-validation-for="Employee.JobPosistionId" class="text-danger"></span>
+                                         <div class="col-md-6 mb-4">
+                                                 <div class="form-outline mb-4">
+                                                    <label asp-for="Employee.JobPosistionId" class="form-label">Job Position</label>
+                                                     <select asp-for="Employee.JobPosistionId" asp-items="@Model.JobPositionList" id="form3Example10" class="form-select form-select-lg">
+                                                        <option disabled selected>--- Select a Job Position ---</option>    
+                                                    </select>
+                                                    <span asp-validation-for="Employee.JobPosistionId" class="text-danger"></span>
+                                                </div>
                                         </div>
                                         @if(@Model.Employee.ImageUrl==null)
                                             {
-                                                 <div class="form-outline mb-4">
-                                                    <img src="~/img/Profile.png" alt="Pending Select Employee Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                  <div class="form-outline col-md-5 mb-4 offset-1">
+                                                    <img src="~/img/Profile.png" alt="Pending Select Employee Image" height="80%" width="50%" style="border-radius:5px; border:1px solid #bbb9b9" />
                                                 </div>
                                             }
                                             else
                                             {
-                                                <div class="form-outline mb-4">
-                                                    <img src="@Model.Employee.ImageUrl" alt="Employee Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                <div class="form-outline col-md-5 mb-4 offset-1">
+                                                    <img src="@Model.Employee.ImageUrl" alt="Employee Image" height="80%" width="50%" style="border-radius:5px; border:1px solid #bbb9b9" />
                                                 </div>
                                             }
-                                        </div>
+                                        
                                         <div class="row">
                                         </div>
                                         <div class="d-flex justify-content-end pt-3">
@@ -192,7 +228,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    
+ 
 </section>
 
 @section Scripts{
@@ -200,6 +237,13 @@
 <partial name="_ValidationScriptsPartial" />
 }
 <script>
+
+     tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+
   function ValidateInput(){
 		if(document.getElementById("uploadBox").value==""){
 			Swal.fire({
