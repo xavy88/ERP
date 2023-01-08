@@ -61,6 +61,7 @@ namespace ERP.DataAccess.Repository
                 dayOffFromDb.Type= obj.Type;
                 dayOffFromDb.StartDate = obj.StartDate;
                 dayOffFromDb.EndDate = obj.EndDate;
+                dayOffFromDb.Approved = obj.Approved;
                 dayOffFromDb.UpdatedBy = obj.UpdatedBy;
                 dayOffFromDb.UpdatedDateTime = obj.UpdatedDateTime;
                 dayOffFromDb.Closed = obj.Closed;

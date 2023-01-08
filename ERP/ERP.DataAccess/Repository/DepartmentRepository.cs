@@ -19,7 +19,32 @@ namespace ERP.DataAccess.Repository
        
         public void Update(Department obj)
         {
-            _db.Departments.Update(obj);
+            var dptFromDb = _db.Departments.FirstOrDefault(d => d.Id == obj.Id);
+            if (dptFromDb != null)
+            {
+
+                dptFromDb.Name = obj.Name;
+                dptFromDb.Remark = obj.Remark;
+                dptFromDb.UpdatedBy = obj.UpdatedBy;
+                dptFromDb.UpdatedDateTime = obj.UpdatedDateTime;
+            }
+            
+        }
+
+        public void ChangeStatus(Department obj)
+        {
+            var dptFromDb = _db.Departments.FirstOrDefault(d => d.Id == obj.Id);
+            if (dptFromDb != null)
+            {
+                if (dptFromDb.Active == true)
+                {
+                    dptFromDb.Active = false;
+                }
+                else
+                {
+                    dptFromDb.Active = true;
+                }
+            }
         }
     }
 }

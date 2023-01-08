@@ -17,7 +17,7 @@ namespace ERP.Web.Areas.HR.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Employee> objEmployeeList = _unitOfWork.Employee.GetAll(includeProperties:"Department,jobPosition");
+            IEnumerable<Employee> objEmployeeList = _unitOfWork.Employee.GetAll(e=>e.Active == true,includeProperties:"Department,jobPosition");
             return View(objEmployeeList);
         }
 

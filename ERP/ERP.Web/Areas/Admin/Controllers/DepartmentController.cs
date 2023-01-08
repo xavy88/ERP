@@ -2,6 +2,7 @@
 using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ERP.Web.Controllers
 {
@@ -16,7 +17,7 @@ namespace ERP.Web.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Department> objDepartmentList = _unitOfWork.Department.GetAll();
+            IEnumerable<Department> objDepartmentList = _unitOfWork.Department.GetAll(d=> d.Active == true);
             return View(objDepartmentList);
         }
 
@@ -31,7 +32,14 @@ namespace ERP.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-            _unitOfWork.Department.Add(dpt);
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+
+                dpt.CreatedBy = ext;
+                dpt.CreatedDateTime = DateTime.Now;
+                _unitOfWork.Department.Add(dpt);
             _unitOfWork.Save();
                 TempData["success"] = "Department created successfully";
             return RedirectToAction("Index");
@@ -61,6 +69,13 @@ namespace ERP.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+                dpt.UpdatedBy = ext;
+                dpt.UpdatedDateTime = DateTime.Now;
+
                 _unitOfWork.Department.Update(dpt);
                 _unitOfWork.Save();
                 TempData["success"] = "Department updated successfully";
@@ -71,33 +86,47 @@ namespace ERP.Web.Controllers
             return View(dpt);
         }
 
-        public IActionResult Delete(int? id)
+        //public IActionResult Delete(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
+        //    if (dpt == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(dpt);
+        //}
+
+        //[HttpPost,ActionName("Delete")]
+        //[AutoValidateAntiforgeryToken]
+        //public IActionResult DeletePost(int? id)
+        //{
+        //    Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
+        //    if (dpt == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //        _unitOfWork.Department.Remove(dpt);
+        //        _unitOfWork.Save();
+        //    TempData["success"] = "Department deleted successfully";
+        //    return RedirectToAction("Index");
+
+        //}
+
+        public IActionResult ChangeStatus(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
             Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
             if (dpt == null)
             {
                 return NotFound();
             }
-            return View(dpt);
-        }
-
-        [HttpPost,ActionName("Delete")]
-        [AutoValidateAntiforgeryToken]
-        public IActionResult DeletePost(int? id)
-        {
-            Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
-            if (dpt == null)
-            {
-                return NotFound();
-            }
-
-                _unitOfWork.Department.Remove(dpt);
-                _unitOfWork.Save();
-            TempData["success"] = "Department deleted successfully";
+            _unitOfWork.Department.ChangeStatus(dpt);
+            _unitOfWork.Save();
+            TempData["success"] = "Department removed successfully";
             return RedirectToAction("Index");
 
         }
