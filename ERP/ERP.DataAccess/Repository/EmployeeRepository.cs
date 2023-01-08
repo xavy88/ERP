@@ -58,8 +58,6 @@ namespace ERP.DataAccess.Repository
                 empFromDb.ReportTo = obj.ReportTo;
                 empFromDb.DepartmentId = obj.DepartmentId;
                 empFromDb.JobPosistionId = obj.JobPosistionId;
-                empFromDb.CreatedBy = obj.CreatedBy;
-                empFromDb.CreatedDateTime = obj.CreatedDateTime;
                 empFromDb.UpdatedBy = obj.UpdatedBy;
                 empFromDb.UpdatedDateTime = DateTime.Now;
                 empFromDb.Active = obj.Active;

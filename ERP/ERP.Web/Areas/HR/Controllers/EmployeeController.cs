@@ -3,6 +3,7 @@ using ERP.Models.Models;
 using ERP.Models.Models.VM;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
@@ -86,14 +87,30 @@ namespace ERP.Web.Areas.HR.Controllers
 
                 if (obj.Employee.Id== 0)
                 {
+                    var claimsIdentity = (ClaimsIdentity)User.Identity;
+                    var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                    string str = claim.ToString();
+                    string ext = str.Remove(0, 60);
+
+                    obj.Employee.CreatedBy = ext;
+                    obj.Employee.CreatedDateTime = DateTime.Now;
                     _unitOfWork.Employee.Add(obj.Employee);
+                    TempData["success"] = "Employee created successfully";
                 }
                 else
                 {
+                    var claimsIdentity = (ClaimsIdentity)User.Identity;
+                    var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                    string str = claim.ToString();
+                    string ext = str.Remove(0, 60);
+                    obj.Employee.UpdatedBy = ext;
+                    obj.Employee.UpdatedDateTime = DateTime.Now;
+
                     _unitOfWork.Employee.Update(obj.Employee);
+                    TempData["success"] = "Employee updated successfully";
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Employee created successfully";
+                
                 return RedirectToAction("Index");
             }
             return View(obj.Employee);
