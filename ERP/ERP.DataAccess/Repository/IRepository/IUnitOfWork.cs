@@ -11,6 +11,7 @@ namespace ERP.DataAccess.Repository.IRepository
         IDepartmentRepository Department { get;}
         IJobPositionRepository JobPosition { get; }
         IEmployeeRepository Employee { get; }
+        IDayOffRepository DayOff { get; }
         void Save();
     }
 }

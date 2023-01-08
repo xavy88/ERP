@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DayOff>
+@{
+    ViewData["Title"] = "Day Off List";
+    
+}
+
+<div class="container p-3">
+    <div class="row  pt-4 alert alert-dark">
+        <div class="col-6">
+            <h2 class="text-primary"><i class="bi bi-calendar4-week"></i> Day Off List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="DayOff" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-calendar-plus"></i> Request</a>
+            </div>
+        </div>
+        <br /><br />
+
+
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Qty</th>
+                    <th>Type</th>
+                    <th>Start Date</th>
+                    <th>Approved?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="20%">@obj.Email</td>
+                        <td width="10%">@obj.Qty / @obj.QtyType</td>
+                        <td width="10%">@obj.Type</td>
+                        <td width="10%">@((obj.StartDate.ToString("yyyy-MM-dd")))</td>
+                        <td width="10%">
+                            @if (@obj.Approved)
+                            {
+                                <img src="~/img/ok.png" width:15px; height=15px;>
+                            }
+                            else
+                            {
+                                <img src="~/img/delete.png" width:15px; height=15px;>
+                            }
+                        </td>
+                     <td width="17%">
+                         @if (@obj.Approved)
+                        {
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                        }
+                        else
+                        {
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                        }
+                        @if (@obj.Approved)
+                        {
+                            <a title="Disapprove" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-calendar-range"></i></a>
+                        }
+                        else
+                        {
+                            <a title="Approve" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-calendar-check-fill"></i> </a>
+                        }
+                        @if (@obj.Closed)
+                        {
+                            <a title="Open" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-calendar2-check"></i> </a>
+                        }
+                        else
+                        {
+                            <a title="Close" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-calendar2-x-fill"></i></a>
+                        }
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @section Scripts{
+        <script>
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+        </script>
+
+    }

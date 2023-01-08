@@ -17,5 +17,7 @@ namespace ERP.DataAccess.Data
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<DayOff> DaysOff { get; set; }
+
     }
 }
