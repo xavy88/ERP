@@ -10,6 +10,7 @@ namespace ERP.DataAccess.Repository.IRepository
     public interface IJobPositionRepository : IRepository<JobPosition>
     {
         void Update(JobPosition obj);
-        
+        void ChangeStatus(JobPosition obj);
+
     }
 }
