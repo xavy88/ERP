@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace ERP.Models.Models
 {
-    public class DayOff
+    public class Tasks
     {
         public int Id { get; set; }
-        public string Email { get; set; }
         [Required]
-        public decimal Qty { get; set; }
+        public string Name { get; set; }
         [Required]
-        public string QtyType { get; set; }
+        public int JobPositionId { get; set; }
+        [ForeignKey("JobPositionId")]
+        [ValidateNever]
+        public JobPosition JobPosition { get; set; }
         [Required]
-        public string Type { get; set; }
-        [Required]
-        public DateTime StartDate { get; set; }
-        [Required]
-        public DateTime EndDate { get; set; }
-        public bool Approved { get; set; } = false;
-        public bool Closed { get; set; } = false;
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        [ValidateNever]
+        public Department Department { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDateTime { get; set; }
-     }
+        public bool Active { get; set; } = true;
+    }
 }

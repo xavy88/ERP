@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-@using ERP.Models.Models
+﻿@using ERP.Models.Models
 @model DayOff
 <style>
     .card-registration .select-input.form-control {
@@ -40,16 +36,9 @@
                                     <input hidden asp-for="Id" />
                                     <div class="row">
                                         <div asp-validation-summary="All" class="text-danger"></div>
-                                         @*<div class="form-outline mb-4">
-                                                <label asp-for="Email" class="form-label">Email</label>
-                                                 <select disabled asp-for="Email" id="form3Example10" class="form-select form-select-lg">
-                                                    <option value = @UserManager.GetUserName(User) disabled selected>@UserManager.GetUserName(User)</option>    
-                                                </select>
-                                                <span asp-validation-for="Email" class="text-danger"></span>
-                                            </div>*@
                                         <div class="form-outline mb-4">
                                             <label asp-for="Qty" class="form-label">Qty</label>
-                                            <input placeholder="0.00" autofocus asp-for="Qty" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                            <input placeholder="0.0" autofocus asp-for="Qty" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                              <span asp-validation-for="Qty" class="text-danger"></span>
                                         </div>
                                             <div class="form-outline mb-4">

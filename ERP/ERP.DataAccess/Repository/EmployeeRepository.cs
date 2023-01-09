@@ -67,7 +67,6 @@ namespace ERP.DataAccess.Repository
                 }
 
             }
-                //_db.Employees.Update(obj);
         }
     }
 }

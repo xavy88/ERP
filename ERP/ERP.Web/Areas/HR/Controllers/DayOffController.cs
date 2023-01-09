@@ -16,12 +16,6 @@ namespace ERP.Web.Areas.HR.Controllers
         }
         public IActionResult Index()
         {
-            //Filter by user logged
-            //var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
-            //string str = claim.ToString();
-            //string ext = str.Remove(0, 60);
-            //IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false && d.Email == ext);
 
             IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false);
             return View(objDayOffList);

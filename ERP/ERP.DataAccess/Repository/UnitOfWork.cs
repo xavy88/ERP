@@ -18,11 +18,13 @@ namespace ERP.DataAccess.Repository
             JobPosition = new JobPositionRepository(_db);
             Employee = new EmployeeRepository(_db);
             DayOff = new DayOffRepository(_db);
+            Service = new ServiceRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
         public IEmployeeRepository Employee { get; private set; }
         public IDayOffRepository DayOff { get; private set; }
+        public IServiceRepository Service { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

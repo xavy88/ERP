@@ -1,0 +1,95 @@
+﻿@using ERP.Models.Models.VM
+@model ServiceViewModel
+<style>
+    .card-registration .select-input.form-control {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    input.form-control, textarea.form-control-lg {
+        border-color: #ce8035;
+    }
+</style>
+
+<section class="h-100 bg-white">
+    <div class="container <!--py-5--> h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+
+                        <div class="col-xl-6">
+                            <form method="post" asp-action="Upsert">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-pencil-square"></i> @(Model.Service.Id!=0?"Update":"Create") Service</h3>
+                                    <input hidden asp-for="Service.Id" />
+                                    <div class="row">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="Service.Name" class="form-label">Name</label>
+                                            <input autofocus asp-for="Service.Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                             <span asp-validation-for="Service.Name" class="text-danger"></span>
+                                        </div>
+                                         <div class="form-outline mb-4">
+                                                <label asp-for="Service.DepartmentId" class="form-label">Department</label>
+                                                 <select asp-for="Service.DepartmentId" asp-items="@Model.DepartmenList" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Department ---</option>    
+                                                </select>
+                                                <span asp-validation-for="Service.DepartmentId" class="text-danger"></span>
+                                            </div>
+                                         <div class="form-outline mb-4">
+                                            <label asp-for="Service.PriceRange" class="form-label">Price Range</label>
+                                            <input  asp-for="Service.PriceRange" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                             <span asp-validation-for="Service.PriceRange" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="Service.Remark" class="form-label">Remark</label>
+                                            <textarea asp-for="Service.Remark" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
+                                             <span asp-validation-for="Service.Remark" class="text-danger"></span>
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                             @if(Model.Service.Id!=0)
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
+                                            }
+                                            else
+                                            {
+                                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-calendar-plus"></i> Create</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+
+     tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+   </script>
+}
