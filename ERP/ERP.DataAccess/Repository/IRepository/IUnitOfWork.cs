@@ -13,6 +13,7 @@ namespace ERP.DataAccess.Repository.IRepository
         IEmployeeRepository Employee { get; }
         IDayOffRepository DayOff { get; }
         IServiceRepository Service { get; }
+        ITasksRepository Tasks { get; }
         void Save();
     }
 }
