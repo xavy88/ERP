@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Client\Controllers\" />
     <Folder Include="Areas\Employee\Controllers\" />
     <Folder Include="wwwroot\img\employees\" />
+    <Folder Include="wwwroot\img\customer\" />
   </ItemGroup>
 
 </Project>

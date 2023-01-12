@@ -20,6 +20,7 @@ namespace ERP.DataAccess.Repository
             DayOff = new DayOffRepository(_db);
             Service = new ServiceRepository(_db);
             Tasks = new TasksRepository(_db);
+            Client= new ClientRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
@@ -27,6 +28,7 @@ namespace ERP.DataAccess.Repository
         public IDayOffRepository DayOff { get; private set; }
         public IServiceRepository Service { get; private set; }
         public ITasksRepository Tasks { get; private set; }
+        public IClientRepository Client { get; private set; }
         public void Save()
         {
             _db.SaveChanges();
