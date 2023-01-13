@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TaskAssigment>
+@{
+    ViewData["Title"] = "Task Assigment List";
+    
+}
+
+<div class="container p-3">
+    <div class="row  pt-4 alert alert-dark">
+        <div class="col-6">
+            <h2 class="text-primary"><i class="bi bi-card-list"></i> Task Assigment List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="TaskAssigment" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>
+            </div>
+        </div>
+        <br /><br />
+
+
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Client</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                    <th>Closed?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="18%">@obj.Tasks.Name</td>
+                        <td width="20%">@obj.Client.BusinessName</td>
+                        <td width="10%">@obj.Employee.WorkEmail</td>
+                        <td width="15%">@((obj.DueDate.ToString("yyyy-MM-dd")))</td>
+                        <td width="10%">
+                            @if (@obj.Closed)
+                            {
+                                <img src="~/img/ok.png" width:15px; height=15px;>
+                            }
+                            else
+                            {
+                                <img src="~/img/delete.png" width:15px; height=15px;>
+                            }
+                        </td>
+                     <td>
+                        <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                         @if (@obj.Closed)
+                         {
+                            <a title="Open" asp-action="ChangeStatus" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i> </a>
+                        }
+                        else
+                        {
+                            <a title="Close" asp-action="ChangeStatus" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i> </a>
+                        }
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @section Scripts{
+        <script>
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+        </script>
+
+    }

@@ -4,6 +4,7 @@ using ERP.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERP.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230112233359_AddTaskAssigmentTableToDb")]
+    partial class AddTaskAssigmentTableToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,71 +317,6 @@ namespace ERP.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobPositions");
-                });
-
-            modelBuilder.Entity("ERP.Models.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("BillingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Closed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Paid")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Reference")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ERP.Models.Models.Service", b =>
@@ -758,33 +695,6 @@ namespace ERP.DataAccess.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("jobPosition");
-                });
-
-            modelBuilder.Entity("ERP.Models.Models.Order", b =>
-                {
-                    b.HasOne("ERP.Models.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ERP.Models.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ERP.Models.Models.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("ERP.Models.Models.Service", b =>

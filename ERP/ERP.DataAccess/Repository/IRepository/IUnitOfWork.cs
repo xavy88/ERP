@@ -14,7 +14,9 @@ namespace ERP.DataAccess.Repository.IRepository
         IDayOffRepository DayOff { get; }
         IServiceRepository Service { get; }
         ITasksRepository Tasks { get; }
+        ITaskAssigmentRepository TaskAssigment { get; }
         IClientRepository Client { get; }
+        IOrderRepository Order { get; }
         void Save();
     }
 }

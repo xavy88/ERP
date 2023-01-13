@@ -20,7 +20,9 @@ namespace ERP.DataAccess.Data
         public DbSet<DayOff> DaysOff { get; set; }
         public DbSet<Service> Services{ get; set; }
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<TaskAssigment> TaskAssigment { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
     }
