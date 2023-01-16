@@ -1,0 +1,221 @@
+﻿@using ERP.Models.Models.VM
+@model JobOpeningViewModel
+<style>
+    .card-registration .select-input.form-control {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    input.form-control, textarea.form-control-lg {
+        border-color: #ce8035;
+    }
+</style>
+
+<section class="h-100 bg-white">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-12">
+                            <form asp-action="Upsert" method="post" enctype="multipart/form-data">
+                                <input asp-for="JobOpening.Id" hidden />
+                                <input asp-for="JobOpening.ImageUrl"  hidden />
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-journal-medical"></i> @(Model.JobOpening.Id!=0?"Update":"Create") Job Opening</h3>
+
+                                    <div class="row">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="JobOpening.JobTitle" class="form-label">Job</label>
+                                            <input autofocus asp-for="JobOpening.JobTitle" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                            <span asp-validation-for="JobOpening.JobTitle" class="text-danger"></span>
+                                        </div>
+                                         <div class="col-md-4 mb-4">
+                                             <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.DepartmentId" class="form-label">Department</label>
+                                                 <select asp-for="JobOpening.DepartmentId" asp-items="@Model.DepartmenList" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Department ---</option>    
+                                                </select>
+                                                <span asp-validation-for="JobOpening.DepartmentId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-4 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.JobType" class="form-label">Job Type</label>
+                                                 <select asp-for="JobOpening.JobType" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Job Type ---</option>    
+                                                    <option value="Remote">Remote</option>    
+                                                    <option value="On-Site">On-Site</option> 
+                                                    <option value="Hibrid">Hibrid</option> 
+                                                </select>
+                                                <span asp-validation-for="JobOpening.JobType" class="text-danger"></span>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-4 mb-4">
+                                             <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.JobPositionId" class="form-label">Job Position</label>
+                                                 <select asp-for="JobOpening.JobPositionId" asp-items="@Model.JobPositionList" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Job Position ---</option>    
+                                                </select>
+                                                <span asp-validation-for="JobOpening.JobPositionId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Skills" class="form-label">Skills</label>
+                                                <textarea asp-for="JobOpening.Skills" type="text" id="form3Example1m" class="form-control form-control-lg"></textarea>
+                                                <span asp-validation-for="JobOpening.Skills" class="text-danger"></span>
+                                            </div>  
+                                         </div>
+                                          <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Education" class="form-label">Education</label>
+                                                <textarea asp-for="JobOpening.Education" type="text" id="form3Example1m" class="form-control form-control-lg"></textarea>
+                                                <span asp-validation-for="JobOpening.Education" class="text-danger"></span>
+                                            </div>  
+                                         </div>
+                                          <div class="col-md-2 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Salary" class="form-label">Salary</label>
+                                                <input asp-for="JobOpening.Salary" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Salary" class="text-danger"></span>
+                                            </div>  
+                                         </div>
+                                          <div class="col-md-10 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Shift" class="form-label">Shift & Schedule</label>
+                                                <input asp-for="JobOpening.Shift" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Shift" class="text-danger"></span>
+                                            </div>  
+                                         </div>
+                                          <div class="col-md-6 mb-4">
+                                         <div class="form-outline mb-4">
+                                            <label asp-for="JobOpening.MinimumExperience" class="form-label">Minimum Experience</label>
+                                            <textarea asp-for="JobOpening.MinimumExperience" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
+                                            <span asp-validation-for="JobOpening.MinimumExperience" class="text-danger"></span>
+                                          </div>
+                                        </div>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Benefit" class="form-label">Benefit</label>
+                                                <textarea asp-for="JobOpening.Benefit" type="text" id="form3Example1m" class="form-control form-control-lg"></textarea>
+                                                <span asp-validation-for="JobOpening.Benefit" class="text-danger"></span>
+                                            </div>
+                                         </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Vacancy" class="form-label">Vacancy</label>
+                                                <input  asp-for="JobOpening.Vacancy" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Vacancy" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Email" class="form-label">Contact Email</label>
+                                                <input asp-for="JobOpening.Email" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Expire" class="form-label">Expire</label>
+                                                <input asp-for="JobOpening.Expire" type="date" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Expire" class="text-danger"></span>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-6 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.Language" class="form-label">Language</label>
+                                                <input  asp-for="JobOpening.Language" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.Language" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.JobDescription" class="form-label">Description</label>
+                                                <textarea asp-for="JobOpening.JobDescription" type="text" id="form3Example1m" class="form-control form-control-lg"></textarea>
+                                                <span asp-validation-for="JobOpening.JobDescription" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-outline mb-4">
+                                                <label asp-for="JobOpening.HiringLead" class="form-label">Hiring Lead</label>
+                                                <input  asp-for="JobOpening.HiringLead" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <span asp-validation-for="JobOpening.HiringLead" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                            <div class="col-md-4 mb-4">
+                                                 <div class="form-outline mb-4">
+                                                    <label asp-for="JobOpening.ImageUrl" class="form-label">Cover Image</label>
+                                                    <input asp-for="JobOpening.ImageUrl" type="file" name="file" id="uploadBox" class="form-control form-control-lg" />
+                                                </div>
+                                            </div>
+                                        @if(@Model.JobOpening.ImageUrl==null)
+                                            {
+                                                  <div class="form-outline col-md-4 mb-4">
+                                                    <img src="~/img/hiring.jpg" alt="Pending Select Job Image" height="90%" width="60%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-outline col-md-4 mb-4">
+                                                    <img src="@Model.JobOpening.ImageUrl" alt="Job Image" height="80%" width="50%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                                </div>
+                                            }
+                                        
+                                        <div class="row">
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                            @if(Model.JobOpening.Id!=0)
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
+                                            }
+                                            else
+                                            {
+                                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Create</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+ 
+</section>
+
+@section Scripts{
+    @{
+<partial name="_ValidationScriptsPartial" />
+}
+<script>
+
+     tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+
+  function ValidateInput(){
+		if(document.getElementById("uploadBox").value==""){
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: 'Please upload an Image!',
+			});
+			return false;
+		}
+		return true;
+    }
+</script>
+}

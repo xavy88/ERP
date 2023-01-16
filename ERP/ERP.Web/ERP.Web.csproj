@@ -26,6 +26,7 @@
     <Folder Include="Areas\Employee\Controllers\" />
     <Folder Include="wwwroot\img\employees\" />
     <Folder Include="wwwroot\img\customer\" />
+    <Folder Include="wwwroot\img\jobopening\" />
   </ItemGroup>
 
 </Project>

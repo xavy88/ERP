@@ -23,6 +23,7 @@ namespace ERP.DataAccess.Data
         public DbSet<TaskAssigment> TaskAssigment { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<JobOpening> JobOpenings { get; set; }
 
 
     }

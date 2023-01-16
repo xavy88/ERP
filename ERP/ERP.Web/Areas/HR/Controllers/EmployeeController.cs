@@ -28,12 +28,12 @@ namespace ERP.Web.Areas.HR.Controllers
             EmployeeViewModel employeeVM = new()
             {
                 Employee = new(),
-                DepartmenList = _unitOfWork.Department.GetAll().Select(e => new SelectListItem
+                DepartmenList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
                 {
                     Text = e.Name,
                     Value = e.Id.ToString(),
                 }),
-                JobPositionList = _unitOfWork.JobPosition.GetAll().Select(e => new SelectListItem
+                JobPositionList = _unitOfWork.JobPosition.GetAll(jp => jp.Active == true).Select(e => new SelectListItem
                 {
                     Text = e.Name,
                     Value = e.Id.ToString(),

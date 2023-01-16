@@ -17,6 +17,7 @@ namespace ERP.DataAccess.Repository.IRepository
         ITaskAssigmentRepository TaskAssigment { get; }
         IClientRepository Client { get; }
         IOrderRepository Order { get; }
+        IJobOpeningRepository JobOpening { get; }
         void Save();
     }
 }
