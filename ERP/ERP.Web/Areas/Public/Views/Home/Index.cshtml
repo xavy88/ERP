@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ERP.Models.Models
+@model IEnumerable<JobOpening>
+@{
  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -58,6 +60,32 @@
       </div>
 
     </section><!-- End About Section -->
+
+     <!-- ======= Hiring Section ======= -->
+     <div class="container" data-aos="fade-up">
+
+    <header class="section-header">
+      <h2>WE ARE HIRING</h2>
+      <p>Appply to our job positions</p>
+    </header>
+    <div class="row gy-4 justify-content-center">
+        @foreach(var job in Model){
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-box blue ">
+          @*  <i class="ri-discuss-line icon"></i>*@
+          <img class="img-thumbnail rounded mx-auto d-block" src="@job.ImageUrl" height="311px" width="348px">
+            <h3 class="text-center">@job.JobTitle</h3>
+            @*<p>@Html.Raw(@job.JobDescription)</p>*@
+             <div class="text-center">
+                <a asp-area="Public" asp-controller="Home" asp-action="JobDetail" asp-route-id="@job.Id" class="read-more text-center btn btn-info"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+                <a asp-area="Public" asp-controller="JobApplication" asp-action="Upsert" class="read-more text-center btn btn-success"><span>Apply</span> <i class="bi bi-arrow-right"></i></a>
+             </div>
+          </div>
+        </div>
+        }
+        </div>
+    </div>
+     <!-- End Hiring Section -->
 
     <!-- ======= Values Section ======= -->
     <section id="values" class="values">

@@ -24,6 +24,7 @@ namespace ERP.DataAccess.Repository
             Client = new ClientRepository(_db);
             Order = new OrderRepository(_db);
             JobOpening = new JobOpeningRepository(_db);
+            JobApplication = new JobApplicationRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
@@ -35,6 +36,7 @@ namespace ERP.DataAccess.Repository
         public IClientRepository Client { get; private set; }
         public IOrderRepository Order { get; private set; }
         public IJobOpeningRepository JobOpening { get; private set; }
+        public IJobApplicationRepository JobApplication { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

@@ -18,6 +18,7 @@ namespace ERP.DataAccess.Repository.IRepository
         IClientRepository Client { get; }
         IOrderRepository Order { get; }
         IJobOpeningRepository JobOpening { get; }
+        IJobApplicationRepository JobApplication { get; }
         void Save();
     }
 }

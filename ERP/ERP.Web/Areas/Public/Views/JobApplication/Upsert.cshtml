@@ -1,0 +1,131 @@
+﻿@using ERP.Models.Models.VM
+@model JobApplicationViewModel
+ @{Layout = "~/Views/Shared/_LayoutApp.cshtml"; }
+<style>
+    .card-registration .select-input.form-control {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+    #sidebar,#show-sidebar
+    {
+        display:none;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    input.form-control, textarea.form-control-lg {
+        border-color: #ce8035;
+    }
+</style>
+
+
+<section class="h-100 bg-white">
+    <div class="container <!--py-5--> h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                         <div class="col-xl-6">
+                            <form asp-action="Upsert" method="post" enctype="multipart/form-data">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-pencil-square"></i> Application</h3>
+                                    <input asp-for="JobApplication.Id" hidden />
+                                    <input asp-for="JobApplication.CV"  hidden />
+                                    <div class="row">
+                                         <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="JobApplication.Name" class="form-label">Name</label>
+                                            <input autofocus asp-for="JobApplication.Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                             <span asp-validation-for="JobApplication.Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="JobApplication.Email" class="form-label">Email</label>
+                                            <input asp-for="JobApplication.Email" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                             <span asp-validation-for="JobApplication.Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="JobApplication.Phone" class="form-label">Phone</label>
+                                            <input asp-for="JobApplication.Phone" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                             <span asp-validation-for="JobApplication.Phone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label asp-for="JobApplication.Address" class="form-label">Address</label>
+                                            <textarea asp-for="JobApplication.Address" type="text" id="form3Example1m" class="form-control form-control-lg"></textarea>
+                                             <span asp-validation-for="JobApplication.Address" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                                <label asp-for="JobApplication.JobOpeningId" class="form-label">Job</label>
+                                                 <select asp-for="JobApplication.JobOpeningId" asp-items="@Model.JobOpeningList" id="form3Example10" class="form-select form-select-lg">
+                                                    <option disabled selected>--- Select a Job ---</option>    
+                                                </select>
+                                                <span asp-validation-for="JobApplication.JobOpeningId" class="text-danger"></span>
+                                            </div>
+                                             <div class="form-outline mb-4">
+                                                    <label asp-for="JobApplication.CV" class="form-label">Upload your CV</label>
+                                                    <input asp-for="JobApplication.CV" type="file" name="file" id="uploadBox" class="form-control form-control-lg" />
+                                                </div>
+                                                <div class="d-flex justify-content-end pt-3">
+                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to Home</a>
+                                           @* @if(Model.JobApplication.Id!=0)
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
+                                            }
+                                            else
+                                            {*@
+                                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Apply </button>
+                                           @* }*@
+                                        </div>
+                                    </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+ 
+</section>
+@section Scripts{
+    @{
+<partial name="_ValidationScriptsPartial" />
+<partial name="_ExternalReferences" />
+}
+<script>
+     tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+
+     $(document).ready(function() {
+    $(".page-wrapper").removeClass("toggled");
+    });
+
+    // $("#close-sidebar").click(function () {
+    //    $(".page-wrapper").removeClass("toggled");
+    //});
+
+  function ValidateInput(){
+		if(document.getElementById("uploadBox").value==""){
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: 'Please upload an Image!',
+			});
+			return false;
+		}
+		return true;
+    }
+</script>
+}

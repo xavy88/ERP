@@ -24,6 +24,7 @@ namespace ERP.DataAccess.Data
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<JobOpening> JobOpenings { get; set; }
+        public DbSet<JobApplication> JobApplications { get; set; }
 
 
     }

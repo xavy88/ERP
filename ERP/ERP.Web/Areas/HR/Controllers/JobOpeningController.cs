@@ -130,6 +130,5 @@ namespace ERP.Web.Areas.HR.Controllers
             return RedirectToAction("Index");
 
         }
-
     }
 }

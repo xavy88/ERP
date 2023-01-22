@@ -27,6 +27,8 @@
     <Folder Include="wwwroot\img\employees\" />
     <Folder Include="wwwroot\img\customer\" />
     <Folder Include="wwwroot\img\jobopening\" />
+    <Folder Include="wwwroot\cv\" />
+    <Folder Include="wwwroot\img\cv\" />
   </ItemGroup>
 
 </Project>

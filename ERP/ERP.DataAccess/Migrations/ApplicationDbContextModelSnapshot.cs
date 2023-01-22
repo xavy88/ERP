@@ -282,6 +282,51 @@ namespace ERP.DataAccess.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("ERP.Models.Models.JobApplication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Evaluated")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("EvaluatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EvaluatedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("JobOpeningId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobOpeningId");
+
+                    b.ToTable("JobApplications");
+                });
+
             modelBuilder.Entity("ERP.Models.Models.JobOpening", b =>
                 {
                     b.Property<int>("Id")
@@ -842,6 +887,17 @@ namespace ERP.DataAccess.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("jobPosition");
+                });
+
+            modelBuilder.Entity("ERP.Models.Models.JobApplication", b =>
+                {
+                    b.HasOne("ERP.Models.Models.JobOpening", "JobOpening")
+                        .WithMany()
+                        .HasForeignKey("JobOpeningId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobOpening");
                 });
 
             modelBuilder.Entity("ERP.Models.Models.JobOpening", b =>

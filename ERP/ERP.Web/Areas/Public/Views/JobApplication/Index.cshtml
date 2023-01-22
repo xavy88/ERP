@@ -1,0 +1,74 @@
+﻿@model IEnumerable<JobApplication>
+@{
+    ViewData["Title"] = "Job Application List";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+<div class="container p-3">
+    <div class="row  pt-4 alert alert-dark">
+        <div class="col-6">
+            <h2 class="text-primary"><i class="bi bi-person-badge"></i> Job Application List</h2>
+            </div>
+            <div class="col-6 text-end">
+                @*<a asp-controller="JobApplication" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>*@
+            </div>
+        </div>
+        <br /><br />
+
+
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job</th>
+                    <th>CV</th>
+                    <th>Active</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="20%">@obj.Name</td>
+                        <td width="10%">@obj.Email</td>
+                        <td width="20%">@obj.JobOpening.JobTitle</td>
+                        <td width="10%"><a href="@obj.CV" download>Dowload</a></td>
+                        <td width="10%">
+                            @if (@obj.Evaluated)
+                            {
+                                <img src="~/img/delete.png" width:15px; height=15px;>
+                            }
+                            else
+                            {
+                                <img src="~/img/ok.png" width:15px; height=15px;>
+                            }
+                        </td>
+                     <td>
+                        @*<a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>*@
+                         @if (@obj.Evaluated)
+                         {
+                             <a title="Recover" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-node-plus"></i> </a>
+                        }
+                        else
+                        {
+                            <a title="Check" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-check2-square"></i> </a>
+                        }
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @section Scripts{
+        <script>
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+        </script>
+        <partial name="_ValidationScriptsPartial" />
+        <partial name="_ExternalReferences" />
+    }
