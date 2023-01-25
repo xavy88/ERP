@@ -34,6 +34,8 @@ namespace ERP.Models.Models
         public DateTime EndDate { get; set; }
         public DateTime BillingDate { get; set; }
         public string Remark { get; set; }
+        public string? SessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
         public string UpdatedBy { get; set; }

@@ -57,13 +57,13 @@ namespace ERP.DataAccess.Repository
             var orderFromDb = _db.Orders.FirstOrDefault(d => d.Id == obj.Id);
             if (orderFromDb != null)
             {
-                if (orderFromDb.Paid == true)
+                if (orderFromDb.Paid == false)
                 {
-                    orderFromDb.Paid = false;
+                    orderFromDb.Paid = true;
                 }
                 else
                 {
-                    orderFromDb.Paid = true;
+                    orderFromDb.Paid = false;
                 }
             }
         }

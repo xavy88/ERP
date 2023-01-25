@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Order>
+@using Microsoft.Extensions.Options
+@inject IOptions<ERP.Utility.StripeSettings> Stripe
 @{
     ViewData["Title"] = "Order List";
     
@@ -19,7 +21,7 @@
         <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
             <thead>
                 <tr>
-                    <th>Reference</th>
+                   <th>Reference</th>
                     <th>Client</th>
                     <th>Service</th>
                     <th>Billing Date</th>
@@ -31,9 +33,9 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td width="15%">@obj.Reference</td>
-                        <td width="20%">@obj.Client.BusinessName</td>
-                        <td width="20%">@obj.Service.Name</td>
+                       <td width="15%">@obj.Reference</td>
+                        <td width="15%">@obj.Client.BusinessName</td>
+                        <td width="15%">@obj.Service.Name</td>
                         <td width="15%">@((obj.BillingDate.ToString("yyyy-MM-dd")))</td>
                         <td width="5%">
                             @if (@obj.Paid)
