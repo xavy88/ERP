@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PayRollDetail>
+@{
+    ViewData["Title"] = "Employee List";
+    
+}
+
+<div class="container p-3">
+    <div class="row  pt-4 alert alert-dark">
+        <div class="col-6">
+            <h2 class="text-primary"><i class="bi bi-cash-stack"></i> Pay Roll List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="PayRollDetail" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>
+            </div>
+        </div>
+        <br /><br />
+
+
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Pay Roll</th>
+                    <th>Employee</th>
+                    <th>Amount</th>
+                    <th>Extra</th>
+                    <th>Deduction</th>
+                    <th>Total</th>
+                    <th>Paid</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                   var total = ((@obj.Amount + @obj.ExtraPayment) - @obj.Deduction);
+                    <tr>
+                        <td width="13%">@obj.PayRollOrder.Reference</td>
+                        <td width="25%">@obj.Employee.Name</td>
+                        <td width="10%">@obj.Amount.ToString("c")</td>
+                        <td width="10%">@obj.ExtraPayment.ToString("c")</td>
+                        <td width="10%">@obj.Deduction.ToString("c")</td>
+                        <td width="10%">@total.ToString("c")</td>
+                        <td width="5%">
+                            @if (@obj.Paid)
+                            {
+                                <img src="~/img/ok.png" width:15px; height=15px;>
+                            }
+                            else
+                            {
+                                <img src="~/img/delete.png" width:15px; height=15px;>
+                            }
+                        </td>
+                     <td>
+                        <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                         @if (!@obj.Paid)
+                         {
+                            <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-cash-stack"></i> </a>
+                        }
+                       @* else
+                        {
+                            <a title="Recover" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i> </a>
+                        }*@
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @section Scripts{
+        <script>
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+        </script>
+
+    }

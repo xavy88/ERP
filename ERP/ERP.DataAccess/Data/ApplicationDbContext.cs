@@ -25,6 +25,8 @@ namespace ERP.DataAccess.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<JobOpening> JobOpenings { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<PayRollOrder> PayRollOrders { get; set; }
+        public DbSet<PayRollDetail> PayRollDetails { get; set; }
 
 
     }

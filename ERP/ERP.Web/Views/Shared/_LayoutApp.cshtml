@@ -34,7 +34,7 @@
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="#">pro sidebar</a>
+        <a asp-area="Public"  asp-controller="Home" asp-action="Index"><i class="bi bi-house-check"></i> Home</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
@@ -157,7 +157,10 @@
                   <a asp-area="Public" asp-controller="JobApplication" asp-action="Index">Applications</a>
                 </li>
                 <li>
-                  <a href="#">Forms</a>
+                  <a asp-area="HR" asp-controller="PayRollOrder" asp-action="Index">Pay Roll</a>
+                </li>
+                 <li>
+                  <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll Detail</a>
                 </li>
               </ul>
             </div>

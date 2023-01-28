@@ -25,6 +25,8 @@ namespace ERP.DataAccess.Repository
             Order = new OrderRepository(_db);
             JobOpening = new JobOpeningRepository(_db);
             JobApplication = new JobApplicationRepository(_db);
+            PayRollOrder = new PayRollOrderRepository(_db);
+            PayRollDetail = new PayRollDetailRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
@@ -37,6 +39,8 @@ namespace ERP.DataAccess.Repository
         public IOrderRepository Order { get; private set; }
         public IJobOpeningRepository JobOpening { get; private set; }
         public IJobApplicationRepository JobApplication { get; private set; }
+        public IPayRollOrderRepository PayRollOrder { get; private set; }
+        public IPayRollDetailRepository PayRollDetail { get; private set; }
         public void Save()
         {
             _db.SaveChanges();
