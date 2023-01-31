@@ -1,17 +1,22 @@
-﻿using ERP.DataAccess.Repository.IRepository;
+﻿using Dapper;
+using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using System.Data;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
     public class PayRollOrderController : Controller
     {
+        private IDbConnection db;
         private readonly IUnitOfWork _unitOfWork;
-        public PayRollOrderController(IUnitOfWork unitOfWork)
+        public PayRollOrderController(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
+            this.db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
             _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
@@ -104,6 +109,33 @@ namespace ERP.Web.Areas.HR.Controllers
             TempData["success"] = "Pay Roll Closed successfully";
             return RedirectToAction("Index");
 
+        }
+
+        public IActionResult InsertDetails(int? id)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+            string str = claim.ToString();
+            string ext = str.Remove(0, 60);
+            var tim = DateTime.Now;
+
+            var sql = "INSERT INTO PayRollDetails(PayRollOrderId, EmployeeId, Amount, ExtraPayment, Deduction, Paid, CreatedBy , CreatedDateTime , UpdatedDateTime)" +
+                      "SELECT " +
+                      "@Cod, Id, (PayAmount/2), 0, 0, 0, " +
+                      " '" +
+                       ext +
+                       " '" +
+                      ", '" +
+                      tim  +
+                      "' , '" +
+                      tim +
+                      "'" +
+                      " FROM Employees " +
+                      "WHERE Active = 1";
+
+           db.Query(sql, new {@Cod = id });
+            TempData["success"] = "Pay Roll with details inserted successfully";
+            return RedirectToAction("Index");
         }
 
     }
