@@ -94,7 +94,7 @@
                         <li><a asp-area="Identity" asp-controller="Account" asp-action="Register" class="nav-link scrollto">Register</a></li>
                         <li><a asp-area="Identity" asp-controller="Account" asp-action="Login" class="nav-link scrollto">Login</a></li>
                     }
-                    <li><a class="getstarted scrollto" href="#about">Dashboard Area</a></li>
+                    <li><a class="getstarted scrollto" asp-area="User"  asp-controller="Note" asp-action="Index">Dashboard Area</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

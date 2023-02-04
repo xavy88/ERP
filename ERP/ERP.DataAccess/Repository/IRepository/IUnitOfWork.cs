@@ -21,6 +21,7 @@ namespace ERP.DataAccess.Repository.IRepository
         IJobApplicationRepository JobApplication { get; }
         IPayRollOrderRepository PayRollOrder { get; }
         IPayRollDetailRepository PayRollDetail { get; }
+        INoteRepository Note { get; }
         void Save();
     }
 }

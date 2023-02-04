@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Note>
+@{
+    ViewData["Title"] = "Note List";
+    
+}
+
+<!--Temp-->
+    <style>
+    body{
+    background: #edf1f5;
+    margin-top:20px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.card {
+    margin-bottom: 30px;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.57rem;
+}
+
+ .note-has-grid .single-note-item .card {
+     border-radius: 10px
+ }
+
+ .note-has-grid .single-note-item .favourite-note {
+     cursor: pointer
+ }
+
+ .note-has-grid .single-note-item .side-stick {
+     position: absolute;
+     width: 3px;
+     height: 35px;
+     left: 0;
+     background-color: rgba(82, 95, 127, .5)
+ }
+
+ .note-has-grid .single-note-item .category-dropdown.dropdown-toggle:after {
+     display: none
+ }
+
+ .note-has-grid .single-note-item .category [class*=category-] {
+     height: 15px;
+     width: 15px;
+     display: none
+ }
+
+ .note-has-grid .single-note-item .category [class*=category-]::after {
+     content: "\f0d7";
+     font: normal normal normal 14px/1 FontAwesome;
+     font-size: 12px;
+     color: #fff;
+     position: absolute
+ }
+
+ 
+ body > div > main > div > div
+ {
+     padding-left: 0px !important;
+ }
+
+ @@media (max-width:767.98px) {
+     .note-has-grid .single-note-item {
+         max-width: 100%
+     }
+ }
+
+ @@media (max-width:991.98px) {
+     .note-has-grid .single-note-item {
+         max-width: 216px
+     }
+ }
+</style>
+
+
+<div class="page-content container note-has-grid">
+    <ul class="nav nav-pills p-3 bg-white mb-3 rounded-pill align-items-center">
+        <li class="nav-item">
+            <a asp-controller="Note" asp-action="Upsert" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2 active" id="all-category">
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block"><i class="bi bi-plus-circle-fill"></i> Create</span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content bg-transparent">
+
+        <div id="note-full-container" class="note-has-grid row">
+            @foreach (var obj in Model)
+            {
+                <div class="col-md-4 single-note-item all-category" style="">
+                    <div class="card card-body">
+
+                        <span class="side-stick"></span>
+
+                        <h5 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie">@obj.Client.BusinessName<i class="point fa fa-circle ml-1 font-10"></i></h5>
+                        <p class="note-date font-12 text-muted">@obj.CreatedDateTime.ToString("yyyy-MM-dd")</p>
+                        <div class="note-content">
+                            <p class="note-inner-content text-muted">@Html.Raw(obj.Comments)</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="mr-1 btn btn-info"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                            <form asp-action="Delete" asp-route-id="@obj.Id" method="post"><a asp-action="Delete" asp-route-id="@obj.Id" type="submit" title="Delete" onclick="return confirm('Are you sure you want to delete this Note?')" class="btn btn-danger"><i class="fa fa-trash remove-note"></i></a></form>
+                            <div class="ml-auto">
+                                <div class="category-selector btn-group">
+                                    <a class="nav-link dropdown-toggle category-dropdown label-group p-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                                        <div class="category">
+                                            <div class="category-business"></div>
+                                            <div class="category-social"></div>
+                                            <div class="category-important"></div>
+                                            <span class="more-options text-dark"><i class="icon-options-vertical"></i></span>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right category-menu">
+                                        <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business text-success" href="javascript:void(0);">
+                                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1"></i>Business
+                                        </a>
+                                        <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social text-info" href="javascript:void(0);">
+                                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1"></i> Social
+                                        </a>
+                                        <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important text-danger" href="javascript:void(0);">
+                                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1"></i> Important
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
