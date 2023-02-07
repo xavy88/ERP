@@ -34,7 +34,7 @@
                 {
                     <tr>
                        <td width="15%">@obj.Reference</td>
-                        <td width="15%">@obj.Client.BusinessName</td>
+                        <td width="25%">@obj.Client.BusinessName</td>
                         <td width="15%">@obj.Service.Name</td>
                         <td width="15%">@((obj.BillingDate.ToString("yyyy-MM-dd")))</td>
                         <td width="5%">
@@ -49,6 +49,7 @@
                         </td>
                      <td>
                         <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                        <a title="Details" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-ticket-detailed"></i> </a>
                          @if (@obj.Closed)
                          {
                             <a title="Open" asp-action="Close" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i></a>

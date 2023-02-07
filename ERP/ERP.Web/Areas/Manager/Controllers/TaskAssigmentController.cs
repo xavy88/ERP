@@ -16,7 +16,12 @@ namespace ERP.Web.Areas.Manager.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<TaskAssigment> objTaskAssigmentList = _unitOfWork.TaskAssigment.GetAll(e => e.Closed == false, includeProperties: "Tasks,Client,Employee");
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+            string str = claim.ToString();
+            string ext = str.Remove(0, 60);
+
+            IEnumerable<TaskAssigment> objTaskAssigmentList = _unitOfWork.TaskAssigment.GetAll(e => e.Closed == false && e.Employee.Email == ext, includeProperties: "Tasks,Client,Employee");
             return View(objTaskAssigmentList);
         }
 

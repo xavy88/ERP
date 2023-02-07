@@ -20,6 +20,36 @@ namespace ERP.Web.Areas.Sales.Controllers
             IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
             return View(objOrderList);
         }
+        public IActionResult ActiveClient(string dpto)
+        {
+            IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
+
+            switch (dpto)
+            {
+                case "SEO":
+                    objOrderList =objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                case "Web":
+                    objOrderList = objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                case "PPC":
+                    objOrderList = objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                case "App":
+                    objOrderList = objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                case "Multimedia":
+                    objOrderList = objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                case "Social Media":
+                    objOrderList = objOrderList.Where(o => o.Service.Name == dpto);
+                    break;
+                    default:
+                    break;
+            }
+            return View(objOrderList);
+        }
+
 
         //GET
         public IActionResult Upsert(int? id)
@@ -213,6 +243,43 @@ namespace ERP.Web.Areas.Sales.Controllers
             orderVM.Order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
             return View(orderVM);
            
+        }
+
+        //GET
+        public IActionResult Details(int? id)
+        {
+            OrderViewModel orderVM = new()
+            {
+                Order = new(),
+                ServiceList = _unitOfWork.Service.GetAll(s => s.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.BusinessName,
+                    Value = e.Id.ToString(),
+                }),
+            };
+
+            if (id == null || id == 0)
+            {
+                //Create
+                return View(orderVM);
+            }
+            else
+            {
+                //Update
+                orderVM.Order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id);
+                return View(orderVM);
+            }
+            return View(orderVM);
         }
     }
 }
