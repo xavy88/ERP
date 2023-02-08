@@ -28,6 +28,7 @@ namespace ERP.DataAccess.Repository
             PayRollOrder = new PayRollOrderRepository(_db);
             PayRollDetail = new PayRollDetailRepository(_db);
             Note = new NoteRepository(_db);
+            ClientAssigment = new ClientAssigmentRepository(_db);
         }
         public IDepartmentRepository Department { get; private set; }
         public IJobPositionRepository JobPosition { get; private set; }
@@ -43,6 +44,7 @@ namespace ERP.DataAccess.Repository
         public IPayRollOrderRepository PayRollOrder { get; private set; }
         public IPayRollDetailRepository PayRollDetail { get; private set; }
         public INoteRepository Note { get; private set; }
+        public IClientAssigmentRepository ClientAssigment { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

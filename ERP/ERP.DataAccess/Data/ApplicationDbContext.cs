@@ -28,6 +28,7 @@ namespace ERP.DataAccess.Data
         public DbSet<PayRollOrder> PayRollOrders { get; set; }
         public DbSet<PayRollDetail> PayRollDetails { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<ClientAssigment> ClientAssigments { get; set; }
 
 
     }
