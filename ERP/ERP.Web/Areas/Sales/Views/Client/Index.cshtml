@@ -30,10 +30,9 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td width="32%">@obj.BusinessName</td>
+                        <td width="32%"><a asp-controller="Client" asp-action="Details" asp-route-id="@obj.Id">@obj.BusinessName</a></td>
                         <td width="30%">@obj.BusinessEmail</td>
                         <td width="15%">@obj.BusinessPhone</td>
-                        @*<td width="10%"><a href=@obj.Url> @obj.Url</a></td>*@
                         <td width="10%">
                             @if (@obj.Active)
                             {

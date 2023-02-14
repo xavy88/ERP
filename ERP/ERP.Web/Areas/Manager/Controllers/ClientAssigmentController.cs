@@ -114,5 +114,36 @@ namespace ERP.Web.Areas.Manager.Controllers
             TempData["success"] = "Assigment deleted successfully";
             return RedirectToAction("Index");
         }
+        public IActionResult Details(int? id)
+        {
+            ClientAssigmentViewModel clientAssigmentVM = new()
+            {
+                ClientAssigment = new(),
+                ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.BusinessName,
+                    Value = e.Id.ToString(),
+                }),
+                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+            };
+
+                clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                return View(clientAssigmentVM);
+       
+        }
     }
 }

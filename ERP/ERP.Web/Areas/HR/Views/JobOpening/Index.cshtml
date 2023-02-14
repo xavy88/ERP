@@ -31,7 +31,7 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td width="30%">@obj.JobTitle</td>
+                        <td width="30%"><a asp-area="Public" asp-controller="Home" asp-action="JobDetail" asp-route-id="@obj.Id"> @obj.JobTitle</a></td>
                         <td width="10%">@obj.JobPosition.Name</td>
                         <td width="10%">@obj.Department.Name</td>
                         <td width="15%">@obj.HiringLead</td>

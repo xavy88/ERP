@@ -132,5 +132,19 @@ namespace ERP.Web.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            JobPosition jp = _unitOfWork.JobPosition.GetFirstOrDefault(d => d.Id == id);
+            if (jp == null)
+            {
+                return NotFound();
+            }
+            return View(jp);
+        }
     }
 }

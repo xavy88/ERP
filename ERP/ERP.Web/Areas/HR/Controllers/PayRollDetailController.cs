@@ -21,6 +21,12 @@ namespace ERP.Web.Areas.HR.Controllers
             return View(objPayRollDetailList);
         }
 
+        public IActionResult RollDetails(int? id)
+        {
+            IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd =>/* prd.Paid == false &&*/ prd.PayRollOrderId == id, includeProperties: "Employee,PayRollOrder");
+            return View(objPayRollDetailList);
+        }
+
         //GET
         public IActionResult Upsert(int? id)
         {

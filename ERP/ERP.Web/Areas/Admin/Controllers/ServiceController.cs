@@ -99,5 +99,24 @@ namespace ERP.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+
+        //GET
+        public IActionResult Details(int? id)
+        {
+            ServiceViewModel servVM = new()
+            {
+                Service = new(),
+                DepartmenList = _unitOfWork.Department.GetAll().Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+            };
+
+          
+                servVM.Service = _unitOfWork.Service.GetFirstOrDefault(e => e.Id == id);
+                return View(servVM);
+        
+        }
     }
 }

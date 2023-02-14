@@ -113,5 +113,13 @@ namespace ERP.Web.Areas.Sales.Controllers
             return RedirectToAction("Index");
 
         }
+        public IActionResult Details(int? id)
+        {
+            Client client = new Client();
+                       
+                client = _unitOfWork.Client.GetFirstOrDefault(d => d.Id == id);
+                return View(client);
+          
+        }
     }
 }

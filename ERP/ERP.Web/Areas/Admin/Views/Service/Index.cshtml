@@ -30,7 +30,7 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td width="30%">@obj.Name</td>
+                        <td width="30%"><a asp-action="Details" asp-route-id="@obj.Id">@obj.Name</a></td>
                         <td width="20%">@obj.PriceRange</td>
                         <td width="10%">@obj.Department.Name</td>
                         <td width="10%">

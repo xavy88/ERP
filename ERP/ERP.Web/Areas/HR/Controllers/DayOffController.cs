@@ -161,5 +161,19 @@ namespace ERP.Web.Areas.HR.Controllers
 
         }
 
+        //GET
+        public IActionResult Details(int? id)
+        {
+            DayOff dayOff = new DayOff();
+
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+           
+                dayOff = _unitOfWork.DayOff.GetFirstOrDefault(d => d.Id == id);
+                return View(dayOff);
+          
+        }
     }
 }

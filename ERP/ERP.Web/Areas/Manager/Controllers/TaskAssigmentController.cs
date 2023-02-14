@@ -122,5 +122,31 @@ namespace ERP.Web.Areas.Manager.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Details(int? id)
+        {
+            TaskAssigmentViewModel taskAssigmentVM = new()
+            {
+                TaskAssigment = new(),
+                TasksList = _unitOfWork.Tasks.GetAll(t => t.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.BusinessName,
+                    Value = e.Id.ToString(),
+                }),
+            };
+                taskAssigmentVM.TaskAssigment = _unitOfWork.TaskAssigment.GetFirstOrDefault(ta => ta.Id == id);
+                return View(taskAssigmentVM);
+     
+        }
     }
 }

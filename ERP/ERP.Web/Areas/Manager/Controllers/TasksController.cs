@@ -104,5 +104,27 @@ namespace ERP.Web.Areas.Manager.Controllers
             return RedirectToAction("Index");
 
         }
+
+        //GET
+        public IActionResult Details(int? id)
+        {
+            TasksViewModel tasksVM = new()
+            {
+                Tasks = new(),
+                DepartmenList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                JobPositionList = _unitOfWork.JobPosition.GetAll(jp => jp.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+            };
+
+               tasksVM.Tasks = _unitOfWork.Tasks.GetFirstOrDefault(e => e.Id == id);
+                return View(tasksVM);
+        }
     }
 }

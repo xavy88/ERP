@@ -130,5 +130,19 @@ namespace ERP.Web.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
+            if (dpt == null)
+            {
+                return NotFound();
+            }
+            return View(dpt);
+        }
     }
 }

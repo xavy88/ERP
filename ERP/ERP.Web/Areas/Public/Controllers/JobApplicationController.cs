@@ -113,5 +113,22 @@ namespace ERP.Web.Areas.Public.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Details(int? id)
+        {
+            JobApplicationViewModel jobApplicationVM = new()
+            {
+                JobApplication = new(),
+                JobOpeningList = _unitOfWork.JobOpening.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.JobTitle,
+                    Value = e.Id.ToString(),
+                }),
+            };
+
+                jobApplicationVM.JobApplication = _unitOfWork.JobApplication.GetFirstOrDefault(e => e.Id == id);
+                return View(jobApplicationVM);
+            
+        }
     }
 }

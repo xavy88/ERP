@@ -31,8 +31,8 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td width="18%">@obj.Tasks.Name</td>
-                        <td width="20%">@obj.Client.BusinessName</td>
+                        <td width="18%"><a asp-action="Details" asp-route-id="@obj.Id">@obj.Tasks.Name</a></td>
+                        <td width="20%"><a asp-area="Sales" asp-controller="Client" asp-action="Details" asp-route-id="@obj.ClientId">@obj.Client.BusinessName</a></td>
                         <td width="10%">@obj.Employee.WorkEmail</td>
                         <td width="15%">@((obj.DueDate.ToString("yyyy-MM-dd")))</td>
                         <td width="10%">
@@ -53,7 +53,7 @@
                         }
                         else
                         {
-                            <a title="Close" asp-action="ChangeStatus" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i> </a>
+                            <a title="Close" asp-action="ChangeStatus" asp-route-id="@obj.Id" class="btn btn-warning"><i class="bi bi-bookmark-check-fill"></i> </a>
                         }
                     </td>
                     </tr>

@@ -34,7 +34,7 @@
                 {
                     <tr>
                        <td width="15%">@obj.Reference</td>
-                        <td width="25%">@obj.Client.BusinessName</td>
+                        <td width="25%"><a asp-controller="Client" asp-action="Details" asp-route-id="@obj.ClientId">@obj.Client.BusinessName</a></td>
                         <td width="15%">@obj.Service.Name</td>
                         <td width="15%">@((obj.BillingDate.ToString("yyyy-MM-dd")))</td>
                         <td width="5%">
