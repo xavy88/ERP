@@ -25,6 +25,24 @@ namespace ERP.Web.Areas.Manager.Controllers
             return View(objTaskAssigmentList);
         }
 
+        public IActionResult TaskAssigmentList(string status)
+        {
+            IEnumerable<TaskAssigment> objTaskAssigmentList = _unitOfWork.TaskAssigment.GetAll(includeProperties: "Tasks,Client,Employee");
+
+            switch (status)
+            {
+                case "true":
+                    objTaskAssigmentList = objTaskAssigmentList.Where(o => o.Closed == true);
+                    break;
+                case "false":
+                    objTaskAssigmentList = objTaskAssigmentList.Where(o => o.Closed == false);
+                    break;
+                default:
+                    break;
+            }
+            return View(objTaskAssigmentList);
+        }
+
         //GET
         public IActionResult Upsert(int? id)
         {

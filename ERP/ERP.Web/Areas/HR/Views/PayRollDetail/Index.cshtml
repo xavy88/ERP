@@ -1,17 +1,21 @@
-﻿@model IEnumerable<PayRollDetail>
+﻿@using ERP.Utility
+@model IEnumerable<PayRollDetail>
 @{
     ViewData["Title"] = "Employee List";
-    
+
 }
 
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-6">
             <h2 class="text-primary"><i class="bi bi-cash-stack"></i> Pay Roll List</h2>
-            </div>
-            <div class="col-6 text-end">
+        </div>
+        <div class="col-6 text-end">
+            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+            {
                 <a asp-controller="PayRollDetail" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Add</a>
-            </div>
+            }
+        </div>
         </div>
         <br /><br />
 
@@ -35,7 +39,7 @@
                    var total = ((@obj.Amount + @obj.ExtraPayment) - @obj.Deduction);
                     <tr>
                         <td width="13%">@obj.PayRollOrder.Reference</td>
-                        <td width="25%">@obj.Employee.Name</td>
+                        <td width="25%"><a asp-action="Details" asp-route-id="@obj.Id">@obj.Employee.Name</a></td>
                         <td width="8%">@obj.Amount.ToString("c")</td>
                         <td width="8%">@obj.ExtraPayment.ToString("c")</td>
                         <td width="8%">@obj.Deduction.ToString("c")</td>
@@ -50,17 +54,26 @@
                                 <img src="~/img/delete.png" width:15px; height=15px;>
                             }
                         </td>
+                         
                      <td>
+                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+                         {
                         <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
                          @if (!@obj.Paid)
                          {
                             <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-cash-stack"></i> </a>
-                        }
+                          }
                        @* else
                         {
                             <a title="Recover" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i> </a>
-                        }*@
+                                }*@
+                        }
+                        else
+                        {
+                             <a title="Pay" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-search"></i> </a>
+                        }
                     </td>
+                    
                     </tr>
                 }
             </tbody>

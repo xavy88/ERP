@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ClientAssigment>
+@{
+    ViewData["Title"] = "Client Assigment List";
+    
+}
+
+<div class="container p-3">
+    <div class="row  pt-4 alert alert-dark">
+        <div class="col-12">
+            <h2 class="text-primary"><i class="bi bi-person-vcard"></i> Clients</h2>
+            <div class="text-end" style="margin-top: -41px";>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="SEO" class="btn btn-primary"><i class="bi bi-funnel"></i> SEO</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="PPC" class="btn btn-secondary"><i class="bi bi-funnel"></i> PPC</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="Web" class="btn btn-success"><i class="bi bi-funnel"></i> WEB</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="App" class="btn btn-info"><i class="bi bi-funnel"></i> APP</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="Multimedia" class="btn btn-warning"><i class="bi bi-funnel"></i> Multimedia</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="Social Media" class="btn btn-dark"><i class="bi bi-funnel"></i> Social Media</a>
+                <a asp-controller="ClientAssigment" asp-action="ActiveClientAssigment" asp-route-dpto="all" class="btn btn-light"><i class="bi bi-funnel"></i> All</a>
+            </div>
+            </div>
+        </div>
+        <br /><br />
+
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Department</th>
+                    <th>Assigned To</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="30%"><a asp-area="Sales" asp-controller="Client" asp-action="Details" asp-route-id="@obj.ClientId">@obj.Client.BusinessName</a></td>
+                        <td width="10%">@obj.Department.Name</td>
+                        <td width="25%">@obj.Employee.Name</td>
+                        <td width="10%">@obj.JobPosition.Name</td>
+                     <td>
+                       @*<a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>  
+                       <form asp-action="Delete" asp-route-id="@obj.Id" method="post" style="display: initial;"><a asp-action="Delete" asp-route-id="@obj.Id" type="submit" title="Delete" onclick="return confirm('Are you sure you want to delete this Note?')" class="btn btn-danger"><i class="fa fa-trash remove-note"></i></a></form>*@
+                       <a title="Detais" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-list-columns"></i> </a>  
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @section Scripts{
+        <script>
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+        </script>
+
+    }

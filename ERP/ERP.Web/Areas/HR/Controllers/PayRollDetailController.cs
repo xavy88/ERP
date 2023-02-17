@@ -1,12 +1,15 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
+    [Authorize]
     public class PayRollDetailController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -17,8 +20,22 @@ namespace ERP.Web.Areas.HR.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd=>prd.Paid == false,includeProperties:"Employee,PayRollOrder");
-            return View(objPayRollDetailList);
+            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+            {
+                IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd => prd.Paid == false, includeProperties: "Employee,PayRollOrder");
+                return View(objPayRollDetailList);
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+
+                IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd => prd.Paid == false && prd.PayRollOrder.Closed == false && prd.Employee.WorkEmail == ext, includeProperties: "Employee,PayRollOrder");
+                return View(objPayRollDetailList);
+
+            }
         }
 
         public IActionResult RollDetails(int? id)
@@ -112,6 +129,25 @@ namespace ERP.Web.Areas.HR.Controllers
             return RedirectToAction("Index");
 
         }
-
+        public IActionResult Details(int? id)
+        {
+            PayRollDetailViewModel payRollDetailVM = new()
+            {
+                PayRollDetail = new(),
+                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString(),
+                }),
+                PayRollOrderList = _unitOfWork.PayRollOrder.GetAll(pr => pr.Paid == false).Select(e => new SelectListItem
+                {
+                    Text = e.Reference,
+                    Value = e.Id.ToString(),
+                }),
+            };
+                       
+                payRollDetailVM.PayRollDetail = _unitOfWork.PayRollDetail.GetFirstOrDefault(e => e.Id == id);
+                return View(payRollDetailVM);
+        }
     }
 }

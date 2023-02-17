@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using ERP.Utility
+@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -48,25 +49,77 @@
                             <i class="bi bi-person-circle"></i>
                             <strong>@UserManager.GetUserName(User)</strong>
                         </span>
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole(SD.Role_Admin))
                         {
                             <span class="user-role">Administrator</span>
                         }
-                        @if (User.IsInRole("Employee"))
+                        @if (User.IsInRole(SD.Role_App))
                         {
-                            <span class="user-role">Employee</span>
+                            <span class="user-role">App</span>
                         }
-                        @if (User.IsInRole("Manager"))
+                        @if (User.IsInRole(SD.Role_App_Supervisor))
                         {
-                            <span class="user-role">Manager</span>
+                            <span class="user-role">APP Supervisor</span>
                         }
-                        @if (User.IsInRole("Client"))
+                        @if (User.IsInRole(SD.Role_Client))
                         {
                             <span class="user-role">Client</span>
                         }
-                        @if (User.IsInRole("HR"))
+                        @if (User.IsInRole(SD.Role_HR))
                         {
                             <span class="user-role">HR</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Manager))
+                        {
+                            <span class="user-role">Manager</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Multimedia))
+                        {
+                            <span class="user-role">Multimedia</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Multimedia_Supervisor))
+                        {
+                            <span class="user-role">Multimedia Supervisor</span>
+                        }
+                        @if (User.IsInRole(SD.Role_PPC))
+                        {
+                            <span class="user-role">PPC</span>
+                        }
+                        @if (User.IsInRole(SD.Role_PPC_Supervisor))
+                        {
+                            <span class="user-role">PPC Supervisor</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Sales))
+                        {
+                            <span class="user-role">Sales</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Sales_Supervisor))
+                        {
+                            <span class="user-role">Sales Supervisor</span>
+                        }
+                        @if (User.IsInRole(SD.Role_SEO))
+                        {
+                            <span class="user-role">SEO</span>
+                        }
+                        @if (User.IsInRole(SD.Role_SEO_Supervisor))
+                        {
+                            <span class="user-role">SEO Supervisor</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Social_Media))
+                        {
+                            <span class="user-role">Social Media</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Social_Media_Supervisor))
+                        {
+                            <span class="user-role">Social Media Supervisor</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Web))
+                        {
+                            <span class="user-role">Web</span>
+                        }
+                        @if (User.IsInRole(SD.Role_Web_Supervisor))
+                        {
+                            <span class="user-role">Web Supervisor</span>
                         }
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
@@ -75,7 +128,7 @@
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <div class="sidebar-search">
+                <!--<div class="sidebar-search">
                     <div>
                         <div class="input-group">
                             <input type="text" class="form-control search-menu" placeholder="Search...">
@@ -86,12 +139,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
                         <li class="header-menu">
-                            <span>General</span>
+                            <span>Menu</span>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -102,112 +155,145 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">
-                                            Dashboard 1
+                                        <a asp-area="User" asp-controller="Note" asp-action="Index">
+                                            Notes
                                             <span class="badge badge-pill badge-success">Pro</span>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 3</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Admin</span>
-                                <span class="badge badge-pill badge-danger">3</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="Admin" asp-controller="Department" asp-action="Index">
-                                            Departments
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Admin" asp-controller="Service" asp-action="Index">Services</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Admin" asp-controller="JobPosition" asp-action="Index">Job Position</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>HR</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="HR" asp-controller="Employee" asp-action="Index">Employees</a>
                                     </li>
                                     <li>
                                         <a asp-area="HR" asp-controller="DayOff" asp-action="Index">Day Off</a>
                                     </li>
                                     <li>
-                                        <a asp-area="HR" asp-controller="JobOpening" asp-action="Index">Job Opening</a>
+                                        <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">My Tasks</a>
+                                    </li>
+                                     <li>
+                                        <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
                                     </li>
                                     <li>
-                                        <a target="_blank" asp-area="Public" asp-controller="JobApplication" asp-action="Index">Applications</a>
+                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">My Clients</a>
+                                    </li>
+                                     <li>
+                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="ActiveClientAssigment">Clients Assigments</a>
                                     </li>
                                     <li>
-                                        <a asp-area="HR" asp-controller="PayRollOrder" asp-action="Index">Pay Roll</a>
+                                         <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll </a>
                                     </li>
                                     <li>
-                                        <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll Detail</a>
-                                    </li>
+                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Active Client</a>
+                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-chart-line"></i>
-                                <span>Managers</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Assigment</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">Client Assigment</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-globe"></i>
-                                <span>Sales</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="Sales" asp-controller="Client" asp-action="Index">Clients</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Sales" asp-controller="Order" asp-action="Index">Orders</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Client Active</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Admin</span>
+                                    <span class="badge badge-pill badge-danger">3</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Department" asp-action="Index">
+                                                Departments
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Service" asp-action="Index">Services</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="JobPosition" asp-action="Index">Job Position</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Identity" asp-controller="User" asp-action="Index">Users</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Identity" asp-controller="Role" asp-action="Index">Roles</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="far fa-gem"></i>
+                                    <span>HR</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="HR" asp-controller="Employee" asp-action="Index">Employees</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="HR" asp-controller="DayOff" asp-action="Index">Day Off</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="HR" asp-controller="JobOpening" asp-action="Index">Job Opening</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" asp-area="Public" asp-controller="JobApplication" asp-action="Index">Applications</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="HR" asp-controller="PayRollOrder" asp-action="Index">Pay Roll</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll Detail</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Manager))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-chart-line"></i>
+                                    <span>Managers</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Assigment</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">Client Assigment</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Histogram</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Sales_Supervisor))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-globe"></i>
+                                    <span>Sales</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="Sales" asp-controller="Client" asp-action="Index">Clients</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Sales" asp-controller="Order" asp-action="Index">Orders</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Client Active</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
                         <li class="header-menu">
                             <span>Extra</span>
                         </li>
@@ -236,16 +322,16 @@
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="#">
+                <a asp-area="User" asp-controller="Note" asp-action="Index">
                     <i class="fa fa-bell"></i>
                     <span class="badge badge-pill badge-warning notification">3</span>
                 </a>
-                <a href="#">
+                <a href="https://mail.google.com/mail/">
                     <i class="fa fa-envelope"></i>
                     <span class="badge badge-pill badge-success notification">7</span>
                 </a>
-                <a href="#">
-                    <i class="fa fa-cog"></i>
+                <a href="https://drive.google.com/drive/">
+                    <i class="fab fa-google-drive"></i>
                     <span class="badge-sonar"></span>
                 </a>
                @* <a href="#">

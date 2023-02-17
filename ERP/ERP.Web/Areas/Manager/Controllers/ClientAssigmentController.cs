@@ -1,6 +1,7 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
@@ -16,10 +17,52 @@ namespace ERP.Web.Areas.Manager.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(includeProperties: "Client,Department,JobPosition,Employee");
-            return View(objClientAssigmentList);
+            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web_Supervisor) || User.IsInRole(SD.Role_Manager))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c=>c.Client.Active == true && c.Employee.WorkEmail == ext,includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
         }
 
+        public IActionResult ActiveClientAssigment(string dpto)
+        {
+            IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
+
+            switch (dpto)
+            {
+                case "SEO":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Web":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "PPC":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "App":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Multimedia":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Social Media":
+                    objClientAssigmentList = objClientAssigmentList.Where(o => o.Department.Name == dpto);
+                    break;
+                default:
+                    break;
+            }
+            return View(objClientAssigmentList);
+        }
         //GET
         public IActionResult Upsert(int? id)
         {

@@ -1,6 +1,7 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
@@ -16,9 +17,22 @@ namespace ERP.Web.Areas.HR.Controllers
         }
         public IActionResult Index()
         {
+            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+            {
 
-            IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false);
-            return View(objDayOffList);
+                IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false);
+                return View(objDayOffList);
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+
+                IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false && d.Email == ext);
+                return View(objDayOffList);
+            }
         }
 
         //GET

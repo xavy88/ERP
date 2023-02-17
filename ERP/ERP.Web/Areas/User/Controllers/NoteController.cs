@@ -1,12 +1,14 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.User.Controllers
 {
+    [Authorize]
     public class NoteController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

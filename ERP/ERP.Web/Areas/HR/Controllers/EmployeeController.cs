@@ -4,10 +4,11 @@ using ERP.Models.Models.VM;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
-using ERP.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
