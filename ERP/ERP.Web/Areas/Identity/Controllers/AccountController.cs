@@ -33,10 +33,22 @@ namespace ERP.Web.Areas.Identity.Controllers
                 //Creating roles
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole("Client"));
-                await _roleManager.CreateAsync(new IdentityRole("Employee"));
-                await _roleManager.CreateAsync(new IdentityRole("Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("App"));
+                await _roleManager.CreateAsync(new IdentityRole("App-Supervisor"));
                 await _roleManager.CreateAsync(new IdentityRole("Manager"));
                 await _roleManager.CreateAsync(new IdentityRole("HR"));
+                await _roleManager.CreateAsync(new IdentityRole("Multimedia-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("Multimedia"));
+                await _roleManager.CreateAsync(new IdentityRole("PPC-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("PPC"));
+                await _roleManager.CreateAsync(new IdentityRole("Sales-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("Sales"));
+                await _roleManager.CreateAsync(new IdentityRole("Social Media-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("Social Media"));
+                await _roleManager.CreateAsync(new IdentityRole("Web-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("Web"));
+                await _roleManager.CreateAsync(new IdentityRole("SEO-Supervisor"));
+                await _roleManager.CreateAsync(new IdentityRole("SEO"));
 
             }
 
@@ -55,14 +67,14 @@ namespace ERP.Web.Areas.Identity.Controllers
 
             listItems.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
             {
-                Value = "Employee",
-                Text = "Employee"
+                Value = "App",
+                Text = "App"
             });
 
             listItems.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
             {
-                Value = "Supervisor",
-                Text = "Superviros"
+                Value = "App-Supervisor",
+                Text = "App-Supervisor"
             });
 
             listItems.Add(new SelectListItem()
@@ -75,8 +87,66 @@ namespace ERP.Web.Areas.Identity.Controllers
                 Value = "HR",
                 Text = "HR"
             });
-
-
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Multimedia",
+                Text = "Multimedia"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Multimedia-Supervisor",
+                Text = "Mulimedia-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "PPC",
+                Text = "PPC"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "PPC-Supervisor",
+                Text = "PPC-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Sales",
+                Text = "Sales"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Sales-Supervisor",
+                Text = "Sales-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "SEO",
+                Text = "SEO"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "SEO-Supervisor",
+                Text = "SEO-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Social Media",
+                Text = "Social Media"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Social Media-Supervisor",
+                Text = "Social Media-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Web",
+                Text = "Web"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Web-Supervisor",
+                Text = "Web-Supervisor"
+            });
             ViewData["ReturnUrl"] = returnurl;
             RegisterViewModel registerViewModel = new RegisterViewModel()
             {
@@ -105,9 +175,9 @@ namespace ERP.Web.Areas.Identity.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Client");
                     }
-                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Employee")
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "App")
                     {
-                        await _userManager.AddToRoleAsync(user, "Employee");
+                        await _userManager.AddToRoleAsync(user, "App");
                     }
                     else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "HR")
                     {
@@ -117,11 +187,46 @@ namespace ERP.Web.Areas.Identity.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Manager");
                     }
-                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Supervisor")
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "App-Supervisor")
                     {
-                        await _userManager.AddToRoleAsync(user, "Supervisor");
+                        await _userManager.AddToRoleAsync(user, "App-Supervisor");
                     }
-
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Multimedia")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Multimedia");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Multimedia-Supervisor")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Multimedia-Supervisor");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "PPC-Supervisor")
+                    {
+                        await _userManager.AddToRoleAsync(user, "PPC-Supervisor");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "PPC")
+                    {
+                        await _userManager.AddToRoleAsync(user, "PPC");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Sales-Supervisor")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Sales-Supervisor");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Sales")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Sales");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Social Media-Supervisor")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Social Media-Supervisor");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Web-Supervisor")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Web-Supervisor");
+                    }
+                    else if (model.RoleSelected != null && model.RoleSelected.Length > 0 && model.RoleSelected == "Web")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Web");
+                    }
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //return RedirectToAction("Index", "Home");
                     //return RedirectToRoute(new { action = "Index", controller = "Home", area = "Public" });
@@ -145,14 +250,14 @@ namespace ERP.Web.Areas.Identity.Controllers
 
             listItems.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
             {
-                Value = "Employee",
-                Text = "Employee"
+                Value = "App",
+                Text = "App"
             });
 
             listItems.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
             {
-                Value = "Supervisor",
-                Text = "Superviros"
+                Value = "App-Supervisor",
+                Text = "App-Supervisor"
             });
 
             listItems.Add(new SelectListItem()
@@ -165,7 +270,41 @@ namespace ERP.Web.Areas.Identity.Controllers
                 Value = "HR",
                 Text = "HR"
             });
-
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Multimedia",
+                Text = "Multimedia"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Multimedia-Supervisor",
+                Text = "Multimedia-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "PPC",
+                Text = "PPC-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Sales",
+                Text = "Sales-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Social Media",
+                Text = "Social Media-Supervisor"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Web",
+                Text = "Web"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Web-Supervisor",
+                Text = "Web-Supervisor"
+            });
             model.RoleList = listItems;
 
             return View(model);
@@ -249,6 +388,7 @@ namespace ERP.Web.Areas.Identity.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnurl = null)
         {
+            ViewData["ReturnUrl"] = returnurl;
             //request a redirect to the external login provider
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { returnurl = returnurl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
@@ -275,9 +415,10 @@ namespace ERP.Web.Areas.Identity.Controllers
             if (result.Succeeded)
             {
                 //update any authentication tokens
-
+                ViewData["ReturnUrl"] = returnurl;
                 await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
-                return LocalRedirect(returnurl);
+                //return LocalRedirect(returnurl);
+                return RedirectToRoute(new { action = "Index", controller = "Home", area = "Public" });
             }
             else
             {

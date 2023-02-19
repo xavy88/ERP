@@ -188,7 +188,7 @@
                         {
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="fa fa-shopping-cart"></i>
+                                    <i class="fa fa-user-secret"></i>
                                     <span>Admin</span>
                                     <span class="badge badge-pill badge-danger">3</span>
                                 </a>
@@ -220,7 +220,7 @@
                         {
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="far fa-gem"></i>
+                                    <i class="far fa-building"></i>
                                     <span>HR</span>
                                 </a>
                                 <div class="sidebar-submenu">
@@ -272,11 +272,36 @@
                                 </div>
                             </li>
                         }
+                        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web_Supervisor))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-users"></i>
+                                    <span>Supervisor</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Assigment</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">Client Assigment</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Histogram</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
                          @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Sales_Supervisor))
                         {
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="fa fa-globe"></i>
+                                    <i class="fa fa-money-bill"></i>
                                     <span>Sales</span>
                                 </a>
                                 <div class="sidebar-submenu">
@@ -288,7 +313,7 @@
                                             <a asp-area="Sales" asp-controller="Order" asp-action="Index">Orders</a>
                                         </li>
                                         <li>
-                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Client Active</a>
+                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Active Client</a>
                                         </li>
                                     </ul>
                                 </div>
