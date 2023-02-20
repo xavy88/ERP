@@ -24,6 +24,37 @@ namespace ERP.Web.Areas.HR.Controllers
             return View(objEmployeeList);
         }
 
+        public IActionResult AllEmployee(string dpto)
+        {
+            IEnumerable<Employee> objEmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true, includeProperties: "Department,jobPosition");
+
+            switch (dpto)
+            {
+                case "SEO":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Web":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "PPC":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "App":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Multimedia":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                case "Social Media":
+                    objEmployeeList = objEmployeeList.Where(o => o.Department.Name == dpto);
+                    break;
+                default:
+                    break;
+            }
+
+            return View(objEmployeeList);
+        }
+
         //GET
         public IActionResult Upsert(int? id)
         {

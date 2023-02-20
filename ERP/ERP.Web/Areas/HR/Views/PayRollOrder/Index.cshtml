@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PayRollOrder>
+﻿@using ERP.Utility
+@model IEnumerable<PayRollOrder>
 @{
     ViewData["Title"] = "Pay Roll List";
     
@@ -48,16 +49,23 @@
                             }
                         </td>
                      <td width="17%">
-                         <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
-                         @if (!@obj.Paid)
+                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                         {
-                            <a title="Approval Payment" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-warning"><i class="bi bi-cash-coin"></i></a>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                            @if (!@obj.Paid)
+                            {
+                                <a title="Approval Payment" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-warning"><i class="bi bi-cash-coin"></i></a>
+                            }
+                            @if (!@obj.Closed)
+                            {
+                                <a title="Close" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-archive-fill"></i></a>
+                            }
+                            <a title="Generate Details" asp-action="InsertDetails" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-person-add"></i> </a>
                         }
-                        @if (!@obj.Closed)
+                        else
                         {
-                            <a title="Close" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-archive-fill"></i></a>
+                            <a title="Detail" asp-controller="PayRollDetail" asp-action="RollDetails" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-eyeglasses"></i> </a>
                         }
-                        <a title="Generate Details" asp-action="InsertDetails" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-person-add"></i> </a>
                     </td>
                     </tr>
                 }

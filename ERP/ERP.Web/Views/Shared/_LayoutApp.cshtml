@@ -41,9 +41,117 @@
                     </div>
                 </div>
                 <div class="sidebar-header">
-                    <div class="user-pic">
+                   @* <div class="user-pic">
                         <img class="img-responsive img-rounded" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="User picture">
-                    </div>
+                    </div> *@
+                     @if (User.IsInRole(SD.Role_Admin))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/admin.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_App))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/app.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_App_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/supervisor.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Client))
+                    {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/client.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_HR))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/hr.png alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Manager))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/manager.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Multimedia))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/multimedia.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Multimedia_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/multimedia.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_PPC))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/ppc.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_PPC_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/ppc.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Sales))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/sales.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Sales_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/sales.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_SEO))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/seo.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_SEO_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/seo.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Social_Media))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/social-media.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Social_Media_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/social-media.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Web))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/web.png" alt="User picture">
+                        </div>
+                        }
+                        @if (User.IsInRole(SD.Role_Web_Supervisor))
+                        {
+                        <div class="user-pic">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/web.png" alt="User picture">
+                        </div>
+                        }
                     <div class="user-info">
                         <span class="user-name">
                             <i class="bi bi-person-circle"></i>
@@ -257,16 +365,22 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks</a>
-                                        </li>
-                                        <li>
-                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Assigment</a>
+                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
                                         </li>
                                         <li>
                                             <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">Client Assigment</a>
                                         </li>
+                                         <li>
+                                            <a asp-area="HR" asp-controller="Employee" asp-action="AllEmployee">Employees</a>
+                                        </li>
                                         <li>
-                                            <a href="#">Histogram</a>
+                                            <a asp-area="HR" asp-controller="DayOff" asp-action="Index">Day Off</a>
+                                        </li>
+                                         <li>
+                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Active Client</a>
+                                     </li>
+                                      <li>
+                                            <a asp-area="HR" asp-controller="PayRollOrder" asp-action="Index">Pay Roll</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -282,16 +396,10 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks</a>
+                                            <a asp-area="Manager" asp-controller="Tasks" asp-action="Index">Tasks Creation</a>
                                         </li>
                                         <li>
-                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Assigment</a>
-                                        </li>
-                                        <li>
-                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">Client Assigment</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Histogram</a>
+                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">Task Assigment</a>
                                         </li>
                                     </ul>
                                 </div>

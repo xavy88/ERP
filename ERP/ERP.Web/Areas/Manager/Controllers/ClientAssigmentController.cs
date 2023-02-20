@@ -17,13 +17,13 @@ namespace ERP.Web.Areas.Manager.Controllers
         }
         public IActionResult Index()
         {
-            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web_Supervisor) || User.IsInRole(SD.Role_Manager))
-            {
-                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
-                return View(objClientAssigmentList);
-            }
-            else
-            {
+            //if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web_Supervisor) || User.IsInRole(SD.Role_Manager))
+            //{
+            //    IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
+            //    return View(objClientAssigmentList);
+            //}
+            //else
+            //{
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
                 string str = claim.ToString();
@@ -31,7 +31,7 @@ namespace ERP.Web.Areas.Manager.Controllers
 
                 IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c=>c.Client.Active == true && c.Employee.WorkEmail == ext,includeProperties: "Client,Department,JobPosition,Employee");
                 return View(objClientAssigmentList);
-            }
+            //}
         }
 
         public IActionResult ActiveClientAssigment(string dpto)

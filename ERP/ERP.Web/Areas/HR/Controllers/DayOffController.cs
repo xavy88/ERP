@@ -17,7 +17,7 @@ namespace ERP.Web.Areas.HR.Controllers
         }
         public IActionResult Index()
         {
-            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
+            if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR) || User.IsInRole(SD.Role_Manager))
             {
 
                 IEnumerable<DayOff> objDayOffList = _unitOfWork.DayOff.GetAll(d => d.Closed == false);
