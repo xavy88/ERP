@@ -71,7 +71,7 @@
                         @if (User.IsInRole(SD.Role_HR))
                         {
                         <div class="user-pic">
-                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/hr.png alt="User picture">
+                            <img class="img-responsive img-rounded" src="~/img/dpto-avatar/hr.png" alt="User picture">
                         </div>
                         }
                         @if (User.IsInRole(SD.Role_Manager))
@@ -254,51 +254,56 @@
                         <li class="header-menu">
                             <span>Menu</span>
                         </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-tachometer-alt"></i>
-                                <span>Dashboard</span>
-                                <span class="badge badge-pill badge-warning">New</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="User" asp-controller="Note" asp-action="Index">
-                                            Notes
-                                            <span class="badge badge-pill badge-success">Pro</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="HR" asp-controller="DayOff" asp-action="Index">Day Off</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">My Tasks</a>
-                                    </li>
-                                     <li>
-                                        <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
-                                    </li>
-                                    <li>
-                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">My Clients</a>
-                                    </li>
-                                     <li>
-                                            <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="ActiveClientAssigment">Clients Assigments</a>
-                                    </li>
-                                    <li>
-                                         <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll </a>
-                                    </li>
-                                    <li>
-                                            <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Active Client</a>
-                                     </li>
-                                </ul>
-                            </div>
-                        </li>
+                         @if (!User.IsInRole(SD.Role_HR))
+                        {
+                            @if (!User.IsInRole(SD.Role_Client))
+                            {
+                                <li class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fa fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                        <span class="badge badge-pill badge-danger">3</span>
+                                    </a>
+                                    <div class="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <a asp-area="User" asp-controller="Note" asp-action="Index">
+                                                    Notes
+
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="HR" asp-controller="DayOff" asp-action="Index">Day Off</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">My Tasks <span class="badge badge-pill badge-success">New</span></a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">My Clients</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="ActiveClientAssigment">Clients Assigments</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="HR" asp-controller="PayRollDetail" asp-action="Index">Pay Roll </a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="Sales" asp-controller="Order" asp-action="ActiveClient">Active Client</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+                        }
                         @if (User.IsInRole(SD.Role_Admin))
                         {
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-user-secret"></i>
                                     <span>Admin</span>
-                                    <span class="badge badge-pill badge-danger">3</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
@@ -427,26 +432,41 @@
                                 </div>
                             </li>
                         }
+                         @if (User.IsInRole(SD.Role_Client))
+                        {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-money-bill"></i>
+                                    <span>Client Dashboard</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                       <li>
+                                         <a asp-area="Sales" asp-controller="Order" asp-action="Index">My Order</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+                        }
                         <li class="header-menu">
                             <span>Extra</span>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span>Documentation</span>
-                                <span class="badge badge-pill badge-primary">Beta</span>
+                            <a href="https://meet.google.com/">
+                              <i class="fa fa-video-camera"></i>
+                                <span>Meet</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://calendar.google.com/calendar/">
                                 <i class="fa fa-calendar"></i>
                                 <span>Calendar</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-folder"></i>
-                                <span>Examples</span>
+                            <a href="https://mail.google.com/chat/">
+                                <i class="fa fa-comments"></i>
+                                <span>Chat</span>
                             </a>
                         </li>
                     </ul>

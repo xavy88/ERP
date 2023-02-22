@@ -193,6 +193,7 @@ body {
 
         .sidebar-wrapper .sidebar-header .user-info > span {
             display: block;
+            font-size: 13px;
         }
 
         .sidebar-wrapper .sidebar-header .user-info .user-role {

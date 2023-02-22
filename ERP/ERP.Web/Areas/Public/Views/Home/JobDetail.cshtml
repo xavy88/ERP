@@ -1,15 +1,7 @@
 ﻿@using ERP.Models.Models.VM
 @model JobOpeningViewModel
  @{ Layout = null; }
-<style>
-    .slider-area{
-         style="background-image: url('https://themewagon.github.io/jobentry/img/carousel-1.jpg');
-            height: 100vh">
-    }
-    </style>
-@*@{
- Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
+
 <link href="~/css/job/styleJob.css" rel="stylesheet">
    <link rel="stylesheet" href="~/css/job/assets/css/bootstrap.min.css">
    <link rel="stylesheet" href="~/css/job/assets/css/owl.carousel.min.css">
@@ -25,13 +17,14 @@
 
 <!-- TEMP Area Start-->
         <!-- Hero Area Start-->
-        <div class="slider-area ">
-        <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../img/hiring-banner.png">
+        <div class="slider-area" style="background-image: url('/img/wh.png'); background-repeat:no-repeat; background-size:100% 100%">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
                             <h2>@Model.JobOpening.JobTitle</h2>
+                            <br /><br /><br />
                         </div>
                     </div>
                 </div>
@@ -40,7 +33,7 @@
         </div>
         <!-- Hero Area End -->
         <!-- job post company Start -->
-        <div class="job-post-company pt-120 pb-120">
+        <div class="job-post-company pt-28 pb-28">
             <div class="container">
                 <div class="row justify-content-between">
                     <!-- Left Content -->

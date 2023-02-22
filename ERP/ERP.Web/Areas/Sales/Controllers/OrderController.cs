@@ -1,6 +1,7 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Stripe.Checkout;
@@ -19,6 +20,17 @@ namespace ERP.Web.Areas.Sales.Controllers
         {
             IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
             return View(objOrderList);
+
+            if (User.IsInRole(SD.Role_Client))
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+
+                IEnumerable<Order> cliOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false && o.Client.BusinessEmail == ext, includeProperties: "Service,Client,Employee");
+                return View(cliOrderList);
+            }
         }
         public IActionResult ActiveClient(string dpto)
         {
@@ -201,8 +213,7 @@ namespace ERP.Web.Areas.Sales.Controllers
                     Quantity = 1,
                 };
              options.LineItems.Add(sessionLineItem);
-            _unitOfWork.Order.Pay(order);
-            _unitOfWork.Save();
+           
             //}
 
             var service = new SessionService();
@@ -211,10 +222,11 @@ namespace ERP.Web.Areas.Sales.Controllers
             order.PaymentIntentId = session.PaymentIntentId;
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
-
+            _unitOfWork.Order.Pay(order);
+            _unitOfWork.Save();
             #endregion
-          
-           
+
+
 
         }
 
