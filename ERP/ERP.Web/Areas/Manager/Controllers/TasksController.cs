@@ -1,12 +1,15 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.Manager.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
     public class TasksController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

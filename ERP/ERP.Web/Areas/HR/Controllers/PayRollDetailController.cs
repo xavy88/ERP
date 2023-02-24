@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
-    [Authorize]
+    
     public class PayRollDetailController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,6 +18,7 @@ namespace ERP.Web.Areas.HR.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [Authorize]
         public IActionResult Index()
         {
             if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
@@ -37,7 +38,7 @@ namespace ERP.Web.Areas.HR.Controllers
 
             }
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult RollDetails(int? id)
         {
             IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd =>/* prd.Paid == false &&*/ prd.PayRollOrderId == id, includeProperties: "Employee,PayRollOrder");
@@ -45,6 +46,7 @@ namespace ERP.Web.Areas.HR.Controllers
         }
 
         //GET
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult Upsert(int? id)
         {
             PayRollDetailViewModel payRollDetailVM = new()
@@ -77,6 +79,7 @@ namespace ERP.Web.Areas.HR.Controllers
         }
 
         //POST
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(PayRollDetailViewModel obj)
@@ -115,7 +118,7 @@ namespace ERP.Web.Areas.HR.Controllers
             }
             return View(obj.PayRollDetail);
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult Paid(int? id)
         {
             PayRollDetail prd = _unitOfWork.PayRollDetail.GetFirstOrDefault(prd => prd.Id == id);
@@ -129,6 +132,7 @@ namespace ERP.Web.Areas.HR.Controllers
             return RedirectToAction("Index");
 
         }
+        [Authorize]
         public IActionResult Details(int? id)
         {
             PayRollDetailViewModel payRollDetailVM = new()

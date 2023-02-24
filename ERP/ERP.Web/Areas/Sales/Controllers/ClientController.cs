@@ -1,10 +1,13 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.Sales.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
     public class ClientController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

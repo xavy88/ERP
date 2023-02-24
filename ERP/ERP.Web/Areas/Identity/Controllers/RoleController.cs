@@ -1,9 +1,12 @@
 ﻿using ERP.DataAccess.Data;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP.Web.Areas.Identity.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class RoleController : Controller
     {
         private readonly ApplicationDbContext _db;

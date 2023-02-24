@@ -1,12 +1,15 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
     public class JobOpeningController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

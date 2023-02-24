@@ -2,6 +2,7 @@
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
 using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Stripe.Checkout;
@@ -9,6 +10,7 @@ using System.Security.Claims;
 
 namespace ERP.Web.Areas.Sales.Controllers
 {
+    
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -16,6 +18,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         public IActionResult Index()
         {
             IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
@@ -32,6 +35,7 @@ namespace ERP.Web.Areas.Sales.Controllers
                 return View(cliOrderList);
             }
         }
+        [Authorize]
         public IActionResult ActiveClient(string dpto)
         {
             IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
@@ -64,6 +68,7 @@ namespace ERP.Web.Areas.Sales.Controllers
 
 
         //GET
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         public IActionResult Upsert(int? id)
         {
             OrderViewModel orderVM = new()
@@ -101,6 +106,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         }
 
         //POST
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(OrderViewModel obj)
@@ -138,7 +144,7 @@ namespace ERP.Web.Areas.Sales.Controllers
             }
             return View(obj.Order);
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         public IActionResult Close(int? id)
         {
             Order order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id);
@@ -161,6 +167,7 @@ namespace ERP.Web.Areas.Sales.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor + "," + SD.Role_Client)]
         public IActionResult Paid(int? id)
         {
             Order order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
@@ -229,7 +236,7 @@ namespace ERP.Web.Areas.Sales.Controllers
 
 
         }
-
+        [Authorize]
         public IActionResult OrderConfirmation(int id)
         {
             OrderViewModel orderVM = new()
@@ -258,6 +265,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         }
 
         //GET
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor + "," + SD.Role_Client)]
         public IActionResult Details(int? id)
         {
             OrderViewModel orderVM = new()

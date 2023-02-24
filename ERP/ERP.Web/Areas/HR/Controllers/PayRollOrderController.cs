@@ -2,6 +2,8 @@
 using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -10,6 +12,7 @@ using System.Security.Claims;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
     public class PayRollOrderController : Controller
     {
         private IDbConnection db;
@@ -19,6 +22,7 @@ namespace ERP.Web.Areas.HR.Controllers
             this.db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
             _unitOfWork = unitOfWork;
         }
+       
         public IActionResult Index()
         {
 

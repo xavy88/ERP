@@ -1,10 +1,13 @@
 ﻿using ERP.DataAccess.Data;
 using ERP.Models.Models;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP.Web.Areas.Identity.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -15,6 +18,7 @@ namespace ERP.Web.Areas.Identity.Controllers
             _userManager = userManager;
             _db = db; 
         }
+        
         public IActionResult Index()
         {
             var userList = _db.ApplicationUser.ToList();

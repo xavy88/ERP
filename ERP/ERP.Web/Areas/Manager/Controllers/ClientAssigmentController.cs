@@ -2,12 +2,14 @@
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
 using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.Manager.Controllers
 {
+    
     public class ClientAssigmentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,6 +17,7 @@ namespace ERP.Web.Areas.Manager.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [Authorize]
         public IActionResult Index()
         {
             //if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web_Supervisor) || User.IsInRole(SD.Role_Manager))
@@ -33,7 +36,7 @@ namespace ERP.Web.Areas.Manager.Controllers
                 return View(objClientAssigmentList);
             //}
         }
-
+        [Authorize]
         public IActionResult ActiveClientAssigment(string dpto)
         {
             IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
@@ -64,6 +67,7 @@ namespace ERP.Web.Areas.Manager.Controllers
             return View(objClientAssigmentList);
         }
         //GET
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
         public IActionResult Upsert(int? id)
         {
             ClientAssigmentViewModel clientAssigmentVM = new()
@@ -106,6 +110,7 @@ namespace ERP.Web.Areas.Manager.Controllers
         }
 
         //POST
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ClientAssigmentViewModel obj)
@@ -143,7 +148,7 @@ namespace ERP.Web.Areas.Manager.Controllers
             }
             return View(obj.ClientAssigment);
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
         public IActionResult Delete(int? id)
         {
             ClientAssigment clientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
@@ -157,6 +162,7 @@ namespace ERP.Web.Areas.Manager.Controllers
             TempData["success"] = "Assigment deleted successfully";
             return RedirectToAction("Index");
         }
+        [Authorize]
         public IActionResult Details(int? id)
         {
             ClientAssigmentViewModel clientAssigmentVM = new()

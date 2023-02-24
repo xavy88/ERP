@@ -1,6 +1,8 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
@@ -16,6 +18,7 @@ namespace ERP.Web.Areas.Public.Controllers
             _unitOfWork = unitOfWork;
             _hostEnviroment = hostEnvironment;
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult Index()
         {
             IEnumerable<JobApplication> objJobApplicationList = _unitOfWork.JobApplication.GetAll(jo => jo.Evaluated == false, includeProperties: "JobOpening");
@@ -90,7 +93,7 @@ namespace ERP.Web.Areas.Public.Controllers
             }
             return View(obj.JobApplication);
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult Evaluated(int? id)
         {
             JobApplication jobApplication = _unitOfWork.JobApplication.GetFirstOrDefault(jo => jo.Id == id);
@@ -113,7 +116,7 @@ namespace ERP.Web.Areas.Public.Controllers
             return RedirectToAction("Index");
 
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult Details(int? id)
         {
             JobApplicationViewModel jobApplicationVM = new()

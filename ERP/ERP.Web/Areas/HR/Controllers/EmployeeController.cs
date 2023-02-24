@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using ERP.Utility;
 
 namespace ERP.Web.Areas.HR.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

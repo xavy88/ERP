@@ -422,7 +422,7 @@ namespace ERP.Web.Areas.Identity.Controllers
             }
             else
             {
-                //if the user does not have account, the we eill ask the user to create an acount
+                //if the user does not have account, the we will ask the user to create an acount
                 ViewData["ReturnUrl"] = returnurl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);

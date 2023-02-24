@@ -1,15 +1,16 @@
 ﻿using ERP.DataAccess.Data;
 using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ERP.Web.Controllers
 {
-    
+    [Authorize(Roles = SD.Role_Admin)]
     public class JobPositionController : Controller
     {
-
         private readonly IUnitOfWork _unitOfWork;
 
         public JobPositionController(IUnitOfWork unitOfWork)

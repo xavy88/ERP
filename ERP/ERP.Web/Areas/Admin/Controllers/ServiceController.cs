@@ -1,12 +1,15 @@
 ﻿using ERP.DataAccess.Repository.IRepository;
 using ERP.Models.Models;
 using ERP.Models.Models.VM;
+using ERP.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ERP.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class ServiceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
