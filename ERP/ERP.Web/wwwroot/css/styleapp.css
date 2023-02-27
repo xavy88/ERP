@@ -499,3 +499,13 @@ body {
     .chiller-theme .sidebar-footer > a:last-child {
         border-right: none;
     }
+
+    .icon-img{
+        height:32px;
+        width:32px;
+    }
+
+.icon-img-crud {
+    height: 26px;
+    width: 26px;
+}

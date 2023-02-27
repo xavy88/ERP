@@ -82,11 +82,11 @@
 <div class="page-content container note-has-grid">
     <ul class="nav nav-pills p-3 bg-white mb-3 rounded-pill align-items-center">
         <li class="nav-item">
-            <h2 class="text-primary"><i class="bi bi-calendar4-week"></i> Notes</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/notes.png" /> Notes</h2>
         </li>
         <li class="nav-item ms-auto">
             <a asp-controller="Note" asp-action="Upsert" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2 active" id="all-category">
-                <i class="icon-layers mr-1"></i><span class="d-none d-md-block"><i class="bi bi-plus-circle-fill"></i> Create</span>
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block"><img class="icon-img" src="~/img/icons/crud/add.png"  width="20" height="20"/> Create</span>
             </a>
         </li>
     </ul>
@@ -107,8 +107,8 @@
                             <p class="note-inner-content text-muted">@Html.Raw(obj.Comments)</p>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="mr-1 btn btn-info"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                            <form asp-action="Delete" asp-route-id="@obj.Id" method="post"><a asp-action="Delete" asp-route-id="@obj.Id" type="submit" title="Delete" onclick="return confirm('Are you sure you want to delete this Note?')" class="btn btn-danger"><i class="fa fa-trash remove-note"></i></a></form>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="mr-1 btn btn-info"><img class="icon-img" src="~/img/icons/crud/edit.png"  width="20" height="20"/></a>
+                            <form asp-action="Delete" asp-route-id="@obj.Id" method="post"><a asp-action="Delete" asp-route-id="@obj.Id" type="submit" title="Delete" onclick="return confirm('Are you sure you want to delete this Note?')" class="btn btn-danger"><img class="icon-img" src="~/img/icons/crud/delete.png"  width="20" height="20"/></a></form>
                             <div class="ml-auto">
                                 <div class="category-selector btn-group">
                                     <a class="nav-link dropdown-toggle category-dropdown label-group p-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">

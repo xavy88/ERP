@@ -7,7 +7,7 @@
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-6">
-            <h2 class="text-primary"><i class="bi bi-person-badge"></i> Job Application List</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/jobapplications.png" /> Job Application List</h2>
             </div>
             <div class="col-6 text-end">
                 @*<a asp-controller="JobApplication" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>*@
@@ -34,7 +34,7 @@
                         <td width="20%"><a asp-action="Details" asp-route-id="@obj.Id">@obj.Name</a></td>
                         <td width="10%">@obj.Email</td>
                         <td width="20%">@obj.JobOpening.JobTitle</td>
-                        <td width="10%"><a href="@obj.CV" download><i title="Download" class="bi bi-file-earmark-arrow-down"></i></a></td>
+                    <td width="10%"><a title="Download" href="@obj.CV"><img class="icon-img cursor-pointer" src="~/img/icons/crud/cv.png" /></a></td>
                         <td width="10%">
                             @if (@obj.Evaluated)
                             {
@@ -49,11 +49,11 @@
                         @*<a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>*@
                          @if (@obj.Evaluated)
                          {
-                             <a title="Recover" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-node-plus"></i> </a>
+                            <a title="Unmark evaluaded" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img" src="~/img/icons/crud/return.png" /> </a>
                         }
                         else
                         {
-                            <a title="Check" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-check2-square"></i> </a>
+                            <a title="Mark evaluated" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img" src="~/img/icons/crud/approved.png" /> </a>
                         }
                     </td>
                     </tr>

@@ -8,7 +8,7 @@
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-12">
-            <h2 class="text-primary"><i class="bi bi-person-vcard"></i> Clients</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/clients.png" />  Clients</h2>
             <div class="text-end" style="margin-top: -41px";>
                 <a asp-controller="Order" asp-action="ActiveClient" asp-route-dpto="SEO" class="btn btn-primary"><i class="bi bi-funnel"></i> SEO</a>
                 <a asp-controller="Order" asp-action="ActiveClient" asp-route-dpto="PPC" class="btn btn-secondary"><i class="bi bi-funnel"></i> PPC</a>
@@ -53,7 +53,7 @@
                             }
                         </td>
                      <td>
-                        <a title="Details" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-ticket-detailed"></i> </a>
+                        <a title="Details" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/detail-info.png" /> </a>
                     </td>
                     </tr>
                 }

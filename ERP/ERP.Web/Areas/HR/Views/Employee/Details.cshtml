@@ -27,7 +27,7 @@
                                 <input asp-for="Employee.Id" hidden />
                                 <input asp-for="Employee.ImageUrl"  hidden />
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-calendar-fill"></i> @(Model.Employee.Id!=0?"Details":"Create") Employee</h3>
+                                <h3 class="mb-5 text-uppercase text-primary"><img class="icon-img" src="~/img/icons/crud/detail.png" /> @(Model.Employee.Id != 0 ? "Details" : "Create") Employee</h3>
 
                                     <div class="row">
                                         <div asp-validation-summary="All" class="text-danger"></div>
@@ -102,7 +102,7 @@
                                                 <input disabled  asp-for="Employee.PersonalEmail" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                             </div>
                                         </div>
-                                        <div class="form-outline mb-4 bg-warning"><span class="text-info form-label">In Case of Emergency</span></div>
+                                        <div class="form-outline mb-4 bg-info"><span class="text-white form-label">In Case of Emergency</span></div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.ContactName" class="form-label">Name</label>
@@ -131,7 +131,7 @@
                                             <label asp-for="Employee.AddressContact" class="form-label">Address Contact</label>
                                             <textarea disabled asp-for="Employee.AddressContact" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
                                         </div>
-                                        <div class="form-outline mb-4 bg-warning"><hr /></div>
+                                        <div class="form-outline mb-4 bg-info"><hr /></div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.PayAmount" class="form-label">Pay Amount</label>
@@ -182,7 +182,7 @@
                                         <div class="row">
                                         </div>
                                         <div class="d-flex justify-content-end pt-3">
-                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                        <a asp-action="Index" class="btn btn-info form-control btn-lg"><img class="icon-img" src="~/img/icons/crud/return.png" /> Back to list</a>
                                         </div>
                                     </div>
                                     </div>

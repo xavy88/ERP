@@ -8,10 +8,10 @@
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-6">
-            <h2 class="text-primary"><i class="bi bi-calendar4-week"></i> Day Off List</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/dayoff.png" />  Day Off List</h2>
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="DayOff" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-calendar-plus"></i> Request</a>
+                <a asp-controller="DayOff" asp-action="Upsert" class="btn btn-primary"><img class="icon-img" src="~/img/icons/crud/add.png"  width="20" height="20"/> Request</a>
             </div>
         </div>
         <br /><br />
@@ -34,9 +34,9 @@
                     <tr>
                         <td width="20%"><a asp-action="Details" asp-route-id="@obj.Id"> @obj.Email</a></td>
                         <td width="10%">@obj.Qty / @obj.QtyType</td>
-                        <td width="10%">@obj.Type</td>
+                        <td width="8%">@obj.Type</td>
                         <td width="10%">@((obj.StartDate.ToString("yyyy-MM-dd")))</td>
-                        <td width="10%">
+                        <td width="8%">
                             @if (@obj.Approved)
                             {
                                 <img src="~/img/ok.png" width:15px; height=15px;>
@@ -50,32 +50,32 @@
 
                          @if (@obj.Approved)
                         {
-                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/edit.png"/> </a>
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                             {
-                                <a title="Disapprove" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-calendar-range"></i></a>
+                                <a title="Disapprove" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/close.png"/></a>
                             }
                         }
                         else
                         {
-                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/edit.png"/>  </a>
                              @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                                 {
-                            <a title="Approve" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-calendar-check-fill"></i> </a>
+                            <a title="Approve" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img-crud" src="~/img/icons/crud/approved.png"/> </a>
                              }
                         }
                         @if (@obj.Closed)
                         {
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                             {
-                                <a title="Open" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-calendar2-check"></i> </a>
+                                <a title="Open" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img-crud" src="~/img/icons/crud/approved.png"/>  </a>
                             }
                         }
                         else
                         {
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                             {
-                                <a title="Close" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-calendar2-x-fill"></i></a>
+                                <a title="Close" asp-action="Closed" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/close.png"/> </a>
                             }
                         }
                     </td>

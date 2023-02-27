@@ -24,7 +24,7 @@
                 <div class="card card-registration my-4">
                     <div class="row g-0">
                         <div class="col-xl-6 d-none d-xl-block">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                            <img src="~/img/assets/dayoff.jpg"
                                  alt="Sample photo" class="img-fluid"
                                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                         </div>
@@ -32,7 +32,7 @@
                         <div class="col-xl-6">
                             <form method="post" asp-action="Upsert">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-primary"><i class="bi bi-pencil-square"></i> @(Model.Id!=0?"Update":"Request") Day Off</h3>
+                                    <h3 class="mb-5 text-uppercase text-primary"><img class="icon-img" src="~/img/icons/crud/upsert.png"/> @(Model.Id!=0?"Update":"Request") Day Off</h3>
                                     <input hidden asp-for="Id" />
                                     <div class="row">
                                         <div asp-validation-summary="All" class="text-danger"></div>
@@ -81,14 +81,14 @@
                                         <div class="row">
                                         </div>
                                         <div class="d-flex justify-content-end pt-3">
-                                            <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                            <a asp-action="Index" class="btn btn-info form-control btn-lg"><img class="icon-img" src="~/img/icons/crud/return.png"/> Back to list</a>
                                              @if(Model.Id!=0)
                                             {
-                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
+                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><img class="icon-img" src="~/img/icons/crud/edit.png"/> Update</button>
                                             }
                                             else
                                             {
-                                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-calendar-plus"></i> Create</button>
+                                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><img class="icon-img" src="~/img/icons/crud/add.png"/> Create</button>
                                             }
                                         </div>
                                     </div>

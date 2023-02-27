@@ -40,9 +40,11 @@
                     <div class="col-xl-7 col-lg-8">
                         <!-- job single -->
                         <div class="single-job-items mb-50">
+                            <!--
                             <div class="company-img company-img-details">
                                     <a href="#"><img src="@Model.JobOpening.ImageUrl" height=80%; width=80%; alt="Job"></a>
                                 </div>
+                        -->
                             <div class="job-items">
                                 <div class="job-tittle">
                                     <a href="#">
@@ -52,6 +54,7 @@
                                         <li>@Model.JobOpening.JobPosition.Name</li>
                                         <li><i class="fas fa-map-marker-alt"></i>@Model.JobOpening.JobType</li>
                                         <li>$ @Model.JobOpening.Salary</li>
+                                        <a href="#"><img src="@Model.JobOpening.ImageUrl" height=300px; width=300px; alt="Job"></a>
                                     </ul>
                                 </div>
                             </div>

@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace ERP.Web.Areas.Sales.Controllers
 {
-    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
+    
     public class ClientController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -24,6 +24,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         }
 
         //GET
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         public IActionResult Upsert(int? id)
         {
             Client client = new Client();
@@ -43,6 +44,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         }
 
         //POST
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Client obj, IFormFile? file)
@@ -102,7 +104,7 @@ namespace ERP.Web.Areas.Sales.Controllers
             }
             return View(obj);
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
         public IActionResult ChangeStatus(int? id)
         {
             Client cli = _unitOfWork.Client.GetFirstOrDefault(d => d.Id == id);

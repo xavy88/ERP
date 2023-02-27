@@ -1,19 +1,19 @@
 ﻿@using ERP.Utility
 @model IEnumerable<PayRollDetail>
 @{
-    ViewData["Title"] = "Employee List";
+    ViewData["Title"] = "Pay Roll List";
 
 }
 
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-6">
-            <h2 class="text-primary"><i class="bi bi-cash-stack"></i> Pay Roll List</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/payrolldetail.png" />  Pay Roll List</h2>
         </div>
         <div class="col-6 text-end">
             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
             {
-                <a asp-controller="PayRollDetail" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Add</a>
+                <a asp-controller="PayRollDetail" asp-action="Upsert" class="btn btn-primary"><img class="icon-img" src="~/img/icons/crud/add.png" /> Add</a>
             }
         </div>
         </div>
@@ -58,10 +58,10 @@
                      <td>
                          @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                          {
-                        <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/edit.png" /> </a>
                          @if (!@obj.Paid)
                          {
-                            <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-cash-stack"></i> </a>
+                                <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-info"><img class="icon-img-crud" src="~/img/icons/crud/paid.png" /> </a>
                           }
                        @* else
                         {
@@ -70,7 +70,7 @@
                         }
                         else
                         {
-                             <a title="Pay" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-search"></i> </a>
+                            <a title="Pay" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><img class="icon-img-crud" src="~/img/icons/crud/addpaymentdetail.png" /> </a>
                         }
                     </td>
                     

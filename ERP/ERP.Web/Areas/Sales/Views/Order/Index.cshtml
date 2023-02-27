@@ -10,10 +10,10 @@
 <div class="container p-3">
     <div class="row  pt-4 alert alert-dark">
         <div class="col-6">
-            <h2 class="text-primary"><i class="bi bi-card-list"></i> Order List</h2>
+            <h2 class="text-primary"><img class="icon-img" src="~/img/icons/orders.png" /> Order List</h2>
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Order" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>
+            <a asp-controller="Order" asp-action="Upsert" class="btn btn-primary"><img class="icon-img" src="~/img/icons/crud/add.png" /> Create</a>
             </div>
         </div>
         <br /><br />
@@ -51,30 +51,30 @@
                      <td>
                           @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Sales_Supervisor))
                         {
-                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
-                            <a title="Details" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><i class="bi bi-ticket-detailed"></i> </a>
+                            <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/edit.png" /> </a>
+                            <a title="Details" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-info"><img class="icon-img-crud" src="~/img/icons/crud/detail-info.png" /></a>
                             @if (@obj.Closed)
                             {
-                                <a title="Open" asp-action="Close" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-node-plus"></i></a>
+                                <a title="Open" asp-action="Close" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img-crud" src="~/img/icons/crud/open.png" /></a>
                             }
                             else
                             {
-                                <a title="Close" asp-action="Close" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-x-circle"></i> </a>
+                                <a title="Close" asp-action="Close" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/close.png" /> </a>
                             }
                             @if (@obj.Paid)
                             {
-                                <a title="Refund" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-danger"><i class="bi bi-backspace"></i> </a>
+                                <a title="Refund" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/refund.png" /></a>
                             }
                             else
                             {
-                                <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-cash-coin"></i> </a>
+                                <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img-crud" src="~/img/icons/crud/paid.png" /> </a>
                             }
                         }
                          @if (User.IsInRole(SD.Role_Client))
                         {
                             @if (!@obj.Paid)
                             {
-                                 <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><i class="bi bi-cash-coin"></i> </a>
+                                <a title="Pay" asp-action="Paid" asp-route-id="@obj.Id" class="btn btn-primary"><img class="icon-img-crud" src="~/img/icons/crud/paid.png" /> </a>
                             }
                         }
                             </td>
