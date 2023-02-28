@@ -18,7 +18,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor)]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor + "," + SD.Role_Client)]
         public IActionResult Index()
         {
             IEnumerable<Order> objOrderList = _unitOfWork.Order.GetAll(o => o.Closed == false, includeProperties: "Service,Client,Employee");
@@ -170,6 +170,8 @@ namespace ERP.Web.Areas.Sales.Controllers
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor + "," + SD.Role_Client)]
         public IActionResult Paid(int? id)
         {
+            if (User.IsInRole(SD.Role_Client))
+            { 
             Order order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
             if (order == null)
             {
@@ -198,7 +200,7 @@ namespace ERP.Web.Areas.Sales.Controllers
                 LineItems = new List<SessionLineItemOptions>(),
                 Mode = "payment",
                 SuccessUrl = domain + $"Sales/Order/OrderConfirmation?id={order.Id}",
-                CancelUrl = domain + $"Sales/Order/index",
+                 CancelUrl = domain + $"Sales/Order/index",
 
             };
 
@@ -228,14 +230,37 @@ namespace ERP.Web.Areas.Sales.Controllers
             order.SessionId = session.Id;
             order.PaymentIntentId = session.PaymentIntentId;
             Response.Headers.Add("Location", session.Url);
+            
             return new StatusCodeResult(303);
-            _unitOfWork.Order.Pay(order);
-            _unitOfWork.Save();
-            #endregion
 
+                #endregion
 
+            }
+            else if(User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Sales_Supervisor))
+            {
+                Order order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
+                if (order == null)
+                {
+                    return NotFound();
+                }
+
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                string str = claim.ToString();
+                string ext = str.Remove(0, 60);
+                order.UpdatedBy = ext;
+                order.UpdatedDateTime = DateTime.Now;
+                _unitOfWork.Order.Pay(order);
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();
+            }
 
         }
+
         [Authorize]
         public IActionResult OrderConfirmation(int id)
         {
@@ -260,6 +285,15 @@ namespace ERP.Web.Areas.Sales.Controllers
             };
 
             orderVM.Order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
+
+            //Changing the payment status to paid
+            Order order = _unitOfWork.Order.GetFirstOrDefault(o => o.Id == id, includeProperties: "Service,Client,Employee");
+            if (!order.Paid)
+            { 
+            _unitOfWork.Order.Pay(order);
+            _unitOfWork.Save();
+            }
+
             return View(orderVM);
            
         }
