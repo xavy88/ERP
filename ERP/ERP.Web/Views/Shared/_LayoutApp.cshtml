@@ -41,9 +41,6 @@
                     </div>
                 </div>
                 <div class="sidebar-header">
-                   @* <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="User picture">
-                    </div> *@
                      @if (User.IsInRole(SD.Role_Admin))
                         {
                         <div class="user-pic">
@@ -236,20 +233,7 @@
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <!--<div class="sidebar-search">
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control search-menu" placeholder="Search...">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                <!-- sidebar-search  -->
-                <div class="sidebar-menu">
+               <div class="sidebar-menu">
                     <ul>
                         <li class="header-menu">
                             <span>Menu</span>
@@ -490,9 +474,6 @@
                     <i class="fab fa-google-drive"></i>
                     <span class="badge-sonar"></span>
                 </a>
-               @* <a href="#">
-                    <i class="fa fa-power-off"></i>
-                </a>*@
                 <form id="logout" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
                                 <button type="submit"><i class="fa fa-power-off"></i></button>
                             </form>

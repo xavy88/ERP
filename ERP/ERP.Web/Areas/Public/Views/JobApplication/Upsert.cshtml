@@ -75,12 +75,6 @@
                                                 </div>
                                                 <div class="d-flex justify-content-end pt-3">
                                             <a asp-controller="Home" asp-action="Index" class="btn btn-info form-control btn-lg"><img class="icon-img" src="~/img/icons/crud/return.png" /> Back to Home</a>
-                                           @* @if(Model.JobApplication.Id!=0)
-                                            {
-                                                <button type="submit" class="btn btn-primary btn-lg ms-2 form-control"><i class="bi bi-bookmark-plus-fill"></i> Update</button>
-                                            }
-                                            else
-                                            {*@
                                             <button type="submit" onclick="return ValidateInput()" class="btn btn-primary btn-lg ms-2 form-control"><img class="icon-img" src="~/img/icons/crud/apply.png" /> Apply </button>
                                            @* }*@
                                         </div>
@@ -111,10 +105,6 @@
      $(document).ready(function() {
     $(".page-wrapper").removeClass("toggled");
     });
-
-    // $("#close-sidebar").click(function () {
-    //    $(".page-wrapper").removeClass("toggled");
-    //});
 
   function ValidateInput(){
 		if(document.getElementById("uploadBox").value==""){

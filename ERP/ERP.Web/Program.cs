@@ -23,7 +23,7 @@ builder.Services.Configure<IdentityOptions>(opt=>
 });
 builder.Services.ConfigureApplicationCookie(opt =>
 {
-    opt.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/AccessDenied");
+    opt.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/AccessDenied");
     opt.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
     
 });

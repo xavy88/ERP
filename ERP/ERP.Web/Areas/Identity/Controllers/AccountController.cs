@@ -228,8 +228,6 @@ namespace ERP.Web.Areas.Identity.Controllers
                         await _userManager.AddToRoleAsync(user, "Web");
                     }
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    //return RedirectToAction("Index", "Home");
-                    //return RedirectToRoute(new { action = "Index", controller = "Home", area = "Public" });
                     return Redirect(returnurl);
                 }
                 AddErrors(result);
@@ -329,7 +327,6 @@ namespace ERP.Web.Areas.Identity.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    //return LocalRedirect(returnurl);
                     return RedirectToRoute(new { action = "Index", controller = "Home", area = "Public" });
                 }
                 if (result.IsLockedOut)
@@ -374,7 +371,6 @@ namespace ERP.Web.Areas.Identity.Controllers
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
-            //return RedirectToAction(nameof(HomeController.Index), "Home");
             return RedirectToAction("Index", "Home", new { Area = "Public" });
         }
 
@@ -467,6 +463,11 @@ namespace ERP.Web.Areas.Identity.Controllers
             {
                 ModelState.AddModelError(String.Empty, error.Description);
             }
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

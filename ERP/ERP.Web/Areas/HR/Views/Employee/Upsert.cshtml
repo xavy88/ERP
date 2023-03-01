@@ -31,33 +31,49 @@
 
                                     <div class="row">
                                         <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="col-md-6 mb-4">
                                         <div class="form-outline mb-4">
                                             <label asp-for="Employee.Name" class="form-label">Name</label>
                                             <input autofocus asp-for="Employee.Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                             <span asp-validation-for="Employee.Name" class="text-danger"></span>
                                         </div>
-                                         <div class="col-md-6 mb-4">
+                                        </div>
+                                         <div class="col-md-3 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.BirthDay" class="form-label">Bithdate</label>
                                                 <input asp-for="Employee.BirthDay" type="date" id="form3Example1m" class="form-control form-control-lg" />
                                                 <span asp-validation-for="Employee.BirthDay" class="text-danger"></span>
                                             </div>
                                          </div>
-                                         <div class="col-md-6 mb-4">
+                                    <div class="col-md-3 mb-4">
+                                    <div class="form-outline mb-4">
+                                        <label asp-for="Employee.MaritalStatus" class="form-label">Marital Status</label>
+                                        <select asp-for="Employee.MaritalStatus" id="form3Example10" class="form-select form-select-lg">
+                                            <option disabled selected>--- Select a Status ---</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Separated">Separated</option>
+                                            <option value="Divorced">Divorced</option>
+                                            <option value="Widowed">Widowed</option>
+                                        </select>
+                                        <span asp-validation-for="Employee.MaritalStatus" class="text-danger"></span>
+                                    </div>
+                                    </div>
+                                         <div class="col-md-5 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.SSN" class="form-label">Social Security Number</label>
                                                 <input asp-for="Employee.SSN" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                                 <span asp-validation-for="Employee.SSN" class="text-danger"></span>
                                             </div>
                                         </div>
-                                         <div class="col-md-8 mb-4">
+                                         <div class="col-md-5 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.IdentificationId" class="form-label">Identification ID</label>
                                                 <input asp-for="Employee.IdentificationId" type="text" id="form3Example1m" class="form-control form-control-lg" />
                                                 <span asp-validation-for="Employee.IdentificationId" class="text-danger"></span>
                                             </div>  
                                          </div>
-                                         <div class="col-md-4 mb-4">
+                                         <div class="col-md-2 mb-4">
                                             <div class="form-outline mb-4">
                                                 <label asp-for="Employee.Gender" class="form-label">Gender</label>
                                                  <select asp-for="Employee.Gender" id="form3Example10" class="form-select form-select-lg">
@@ -68,18 +84,6 @@
                                                 <span asp-validation-for="Employee.Gender" class="text-danger"></span>
                                             </div>
                                          </div>
-                                        <div class="form-outline mb-4">
-                                            <label asp-for="Employee.MaritalStatus" class="form-label">Marital Status</label>
-                                             <select asp-for="Employee.MaritalStatus" id="form3Example10" class="form-select form-select-lg">
-                                                <option disabled selected>--- Select a Status ---</option>    
-                                                <option value="Single">Single</option>    
-                                                <option value="Married">Married</option> 
-                                                <option value="Separated">Separated</option>
-                                                <option value="Divorced">Divorced</option>
-                                                <option value="Widowed">Widowed</option>
-                                            </select>
-                                            <span asp-validation-for="Employee.MaritalStatus" class="text-danger"></span>
-                                        </div>
                                          <div class="form-outline mb-4">
                                             <label asp-for="Employee.Address" class="form-label">Address</label>
                                             <textarea asp-for="Employee.Address" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>

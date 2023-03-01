@@ -9,9 +9,6 @@
         <div class="col-6">
             <h2 class="text-primary"><img class="icon-img" src="~/img/icons/jobapplications.png" /> Job Application List</h2>
             </div>
-            <div class="col-6 text-end">
-                @*<a asp-controller="JobApplication" asp-action="Upsert" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Create</a>*@
-            </div>
         </div>
         <br /><br />
 
@@ -46,7 +43,6 @@
                             }
                         </td>
                      <td>
-                        @*<a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>*@
                          @if (@obj.Evaluated)
                          {
                             <a title="Unmark evaluaded" asp-action="Evaluated" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img" src="~/img/icons/crud/return.png" /> </a>

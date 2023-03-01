@@ -12,9 +12,12 @@
         <div class="col-6">
             <h2 class="text-primary"><img class="icon-img" src="~/img/icons/orders.png" /> Order List</h2>
             </div>
+              @if (!User.IsInRole(SD.Role_Client))
+              {
             <div class="col-6 text-end">
             <a asp-controller="Order" asp-action="Upsert" class="btn btn-primary"><img class="icon-img" src="~/img/icons/crud/add.png" /> Create</a>
             </div>
+                 }
         </div>
         <br /><br />
 

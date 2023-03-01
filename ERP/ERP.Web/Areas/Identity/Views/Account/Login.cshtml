@@ -4,69 +4,15 @@
 @model LoginViewModel
 
 @{ Layout = null; }
-
-@*<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-          class="img-fluid" alt="Phone image">
-      </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form asp-controller="Account" asp-action="Login" method="post">
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <input asp-for="Email" type="email" id="form1Example13" class="form-control form-control-lg" />
-            <label asp-for="Email" class="form-label" for="form1Example13">Email address</label>
-          </div>
-
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <input asp-for="Password" type="password" id="form1Example23" class="form-control form-control-lg" />
-            <label asp-for="Password"  class="form-label" for="form1Example23">Password</label>
-          </div>
-
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <input asp-for="RememberMe" class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-              <label asp-for="RememberMe" class="form-check-label" for="form1Example3"> Remember me </label>
-            </div>
-            <a asp-action="ForgotPassword">Forgot password?</a>
-          </div>
-
-          <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-          </div>
-
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
-            role="button">
-            <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-          </a>
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
-            role="button">
-            <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</section>*@
-
 <style>
 
 body {
   background-image:url('https://img.freepik.com/premium-photo/entrepreneurs-are-managing-data-their-laptopsdocument-management-concept-online-big-data-documentation-database_29488-6188.jpg?w=826');
-  /*background-image:url('https://img.freepik.com/premium-photo/data-analysis-business-finance-concept_31965-13297.jpg?w=1200');*/
   background-position:center;
   background-size:cover;
   
   -webkit-font-smoothing: antialiased;
   font: normal 14px Roboto,arial,sans-serif;
-  /*font-family: 'Dancing Script', cursive!important;*/
 }
 
 .container {
@@ -121,10 +67,7 @@ h4 {
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
-<!--author:starttemplate-->
-<!--reference site : starttemplate.com-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +105,6 @@ h4 {
                 </br></br>
                  <div class="form-check">
                 <input asp-for="RememberMe" class="form-check-input" type="checkbox" value="" id="form1Example3" &nbsp;/><span> 	&nbsp;	&nbsp; Remeber me?</span>
-                 @*<label asp-for="RememberMe" class="form-check-label" for="form1Example3">     Remember me </label>*@
                   </br></br>
                  </div>
               <a asp-action="ForgotPassword">Forgot password?</a>
@@ -182,10 +124,6 @@ h4 {
                         }
                         @if(loginProviders.Count >0)
                         {
-            @*<a class="btn btn-primary btn-lg btn-block" style="background-color: #3F7FE8" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]"
-              role="button">
-              <i class="fab fa-facebook-f me-2"></i>Continue with Google
-                                </a>*@
                             <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
                                 <div>
                                     <p>
@@ -206,14 +144,6 @@ h4 {
         </div>
         </br></br></br>
    
-    <!--footer-->
-     <!--
-    <div class="footer text-white text-center">
-        <p style="background-color:rgba(0,0,0,.5);padding:1em;">© 2022 ERP. All rights reserved | Design by <a href="#">Xavy</a></p>
-    </div>
-    -->
-    <!--//footer-->
-    
 </div>
 </body>
 </html>

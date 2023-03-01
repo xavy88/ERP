@@ -189,8 +189,6 @@ namespace ERP.Web.Areas.Sales.Controllers
             #region Stripe Settings
 
             var domain = "https://localhost:44373/";
-            //OrderViewModel orderVM = new();
-
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string>
@@ -203,9 +201,6 @@ namespace ERP.Web.Areas.Sales.Controllers
                  CancelUrl = domain + $"Sales/Order/index",
 
             };
-
-            //foreach (var item in orderVM.Order)
-            //{
 
                 var sessionLineItem = new SessionLineItemOptions
                 {
@@ -222,8 +217,6 @@ namespace ERP.Web.Areas.Sales.Controllers
                     Quantity = 1,
                 };
              options.LineItems.Add(sessionLineItem);
-           
-            //}
 
             var service = new SessionService();
             Session session = service.Create(options);

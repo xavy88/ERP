@@ -32,37 +32,5 @@ namespace ERP.DataAccess.Repository
                 }
             }
         }
-
-        //public void Update(JobOpening obj)
-        //{
-        //    var jobOpeningFromDb = _db.JobOpenings.FirstOrDefault(jo=>jo.Id==obj.Id);
-        //    if (jobOpeningFromDb != null)
-        //    {
-        //        jobOpeningFromDb.JobTitle = obj.JobTitle;
-        //        jobOpeningFromDb.DepartmentId = obj.DepartmentId;
-        //        jobOpeningFromDb.JobType=obj.JobType;
-        //        jobOpeningFromDb.Benefit = obj.Benefit;
-        //        jobOpeningFromDb.JobPositionId = obj.JobPositionId;
-        //        jobOpeningFromDb.Skills = obj.Skills;
-        //        jobOpeningFromDb.Education = obj.Education;
-        //        jobOpeningFromDb.Salary = obj.Salary;
-        //        jobOpeningFromDb.Shift = obj.Shift;
-        //        jobOpeningFromDb.MinimumExperience = obj.MinimumExperience;
-        //        jobOpeningFromDb.Vacancy = obj.Vacancy;
-        //        jobOpeningFromDb.Email = obj.Email;
-        //        jobOpeningFromDb.Expire = obj.Expire;
-        //        jobOpeningFromDb.Language = obj.Language;
-        //        jobOpeningFromDb.JobDescription = obj.JobDescription;
-        //        jobOpeningFromDb.HiringLead = obj.HiringLead;
-        //        jobOpeningFromDb.UpdatedBy = obj.UpdatedBy;
-        //        jobOpeningFromDb.UpdatedDateTime = DateTime.Now;
-        //        jobOpeningFromDb.Active = obj.Active;
-        //        if (jobOpeningFromDb.ImageUrl!=null)
-        //        {
-        //            jobOpeningFromDb.ImageUrl = obj.ImageUrl;
-        //        }
-
-        //    }
-        //}
     }
 }

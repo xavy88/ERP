@@ -99,7 +99,6 @@ namespace ERP.Web.Areas.Sales.Controllers
                     TempData["success"] = "Client updated successfully";
                 }
                 _unitOfWork.Save();
-                //TempData["success"] = "Day Off Requested successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);

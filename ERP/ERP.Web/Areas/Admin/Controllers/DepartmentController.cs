@@ -89,37 +89,6 @@ namespace ERP.Web.Controllers
             return View(dpt);
         }
 
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
-        //    if (dpt == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(dpt);
-        //}
-
-        //[HttpPost,ActionName("Delete")]
-        //[AutoValidateAntiforgeryToken]
-        //public IActionResult DeletePost(int? id)
-        //{
-        //    Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
-        //    if (dpt == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //        _unitOfWork.Department.Remove(dpt);
-        //        _unitOfWork.Save();
-        //    TempData["success"] = "Department deleted successfully";
-        //    return RedirectToAction("Index");
-
-        //}
-
         public IActionResult ChangeStatus(int? id)
         {
             Department dpt = _unitOfWork.Department.GetFirstOrDefault(d => d.Id == id);
