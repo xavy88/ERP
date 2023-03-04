@@ -1,4 +1,5 @@
 ﻿@using ERP.Models.Models.VM
+@using ERP.Utility;
 @model OrderViewModel
 <style>
     .card-registration .select-input.form-control {
@@ -80,9 +81,18 @@
                                         </div>
                                         <div class="row">
                                         </div>
+                                          @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Sales_Supervisor))
+                                          {
                                         <div class="d-flex justify-content-end pt-3">
                                             <a asp-action="Index" class="btn btn-info form-control btn-lg"><img class="icon-img" src="~/img/icons/crud/return.png" /> Back to list</a>
-                                        </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex justify-content-end pt-3">
+                                                <a asp-action="ActiveClient" class="btn btn-info form-control btn-lg"><img class="icon-img" src="~/img/icons/crud/return.png" /> Back to list</a>
+                                            </div>
+                                        }
                                     </div>
                                     </div>
                             </form>

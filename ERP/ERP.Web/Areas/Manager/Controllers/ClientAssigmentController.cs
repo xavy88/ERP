@@ -63,43 +63,373 @@ namespace ERP.Web.Areas.Manager.Controllers
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
         public IActionResult Upsert(int? id)
         {
-            ClientAssigmentViewModel clientAssigmentVM = new()
-            {
-                ClientAssigment = new(),
-                ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
-                {
-                    Text = e.BusinessName,
-                    Value = e.Id.ToString(),
-                }),
-                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
-                {
-                    Text = e.Name,
-                    Value = e.Id.ToString(),
-                }),
-                DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
-                {
-                    Text = e.Name,
-                    Value = e.Id.ToString(),
-                }),
-                JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
-                {
-                    Text = e.Name,
-                    Value = e.Id.ToString(),
-                }),
-            };
+            #region deleteme
+            //ClientAssigmentViewModel clientAssigmentVM = new()
+            //{
+            //    ClientAssigment = new(),
+            //    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+            //    {
+            //        Text = e.BusinessName,
+            //        Value = e.Id.ToString(),
+            //    }),
+            //    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+            //    {
+            //        Text = e.Name,
+            //        Value = e.Id.ToString(),
+            //    }),
+            //    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+            //    {
+            //        Text = e.Name,
+            //        Value = e.Id.ToString(),
+            //    }),
+            //    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+            //    {
+            //        Text = e.Name,
+            //        Value = e.Id.ToString(),
+            //    }),
+            //};
 
-            if (id == null || id == 0)
+            //if (id == null || id == 0)
+            //{
+            //    //Create
+            //    return View(clientAssigmentVM);
+            //}
+            //else
+            //{
+            //    //Update
+            //    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+            //    return View(clientAssigmentVM);
+            //}
+            //return View(clientAssigmentVM);
+            #endregion
+
+            if (User.IsInRole(SD.Role_App) || User.IsInRole(SD.Role_App_Supervisor))
             {
-                //Create
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name=="App").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
                 return View(clientAssigmentVM);
             }
+
+            else if (User.IsInRole(SD.Role_Multimedia) || User.IsInRole(SD.Role_Multimedia_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "Multimedia").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
+            else if (User.IsInRole(SD.Role_PPC) || User.IsInRole(SD.Role_PPC_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "PPC").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
+            else if (User.IsInRole(SD.Role_Sales) || User.IsInRole(SD.Role_Sales_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "Sales").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
+            else if (User.IsInRole(SD.Role_SEO) || User.IsInRole(SD.Role_SEO_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "SEO").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
+            else if (User.IsInRole(SD.Role_Social_Media) || User.IsInRole(SD.Role_Social_Media_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "Social Media").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
+            else if (User.IsInRole(SD.Role_Web) || User.IsInRole(SD.Role_Web_Supervisor))
+            {
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name == "Web").Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
+                return View(clientAssigmentVM);
+            }
+
             else
             {
-                //Update
-                clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                ClientAssigmentViewModel clientAssigmentVM = new()
+                {
+                    ClientAssigment = new(),
+                    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.BusinessName,
+                        Value = e.Id.ToString(),
+                    }),
+                    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
+                    {
+                        Text = e.Name,
+                        Value = e.Id.ToString(),
+                    }),
+                };
+
+                if (id == null || id == 0)
+                {
+                    //Create
+                    return View(clientAssigmentVM);
+                }
+                else
+                {
+                    //Update
+                    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
+                    return View(clientAssigmentVM);
+                }
                 return View(clientAssigmentVM);
             }
-            return View(clientAssigmentVM);
         }
 
         //POST

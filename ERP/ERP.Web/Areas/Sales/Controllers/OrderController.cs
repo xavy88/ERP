@@ -79,7 +79,7 @@ namespace ERP.Web.Areas.Sales.Controllers
                     Text = e.Name,
                     Value = e.Id.ToString(),
                 }),
-                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
+                EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true && e.Department.Name =="Sales").Select(e => new SelectListItem
                 {
                     Text = e.Name,
                     Value = e.Id.ToString(),
@@ -292,7 +292,7 @@ namespace ERP.Web.Areas.Sales.Controllers
         }
 
         //GET
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Sales_Supervisor + "," + SD.Role_Client)]
+        [Authorize]
         public IActionResult Details(int? id)
         {
             OrderViewModel orderVM = new()

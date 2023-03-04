@@ -33,7 +33,7 @@ namespace ERP.Web.Areas.HR.Controllers
                 string str = claim.ToString();
                 string ext = str.Remove(0, 60);
 
-                IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd => prd.Paid == false && prd.PayRollOrder.Closed == false && prd.Employee.WorkEmail == ext, includeProperties: "Employee,PayRollOrder");
+                IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd => prd.PayRollOrder.Closed == false && prd.Employee.WorkEmail == ext, includeProperties: "Employee,PayRollOrder");
                 return View(objPayRollDetailList);
 
             }
@@ -41,7 +41,7 @@ namespace ERP.Web.Areas.HR.Controllers
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_HR)]
         public IActionResult RollDetails(int? id)
         {
-            IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd =>/* prd.Paid == false &&*/ prd.PayRollOrderId == id, includeProperties: "Employee,PayRollOrder");
+            IEnumerable<PayRollDetail> objPayRollDetailList = _unitOfWork.PayRollDetail.GetAll(prd =>prd.PayRollOrderId == id, includeProperties: "Employee,PayRollOrder");
             return View(objPayRollDetailList);
         }
 

@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- theme meta -->
     <meta name="theme-xavy" content="xavy" />
-    <title>ERP Admin: ERP Admin Dashboard</title>
+    <title>ERP Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                         </div>
                         }
                         @if (User.IsInRole(SD.Role_Client))
-                    {
+                        {
                         <div class="user-pic">
                             <img class="img-responsive img-rounded" src="~/img/dpto-avatar/client.png" alt="User picture">
                         </div>
@@ -238,7 +238,7 @@
                         <li class="header-menu">
                             <span>Menu</span>
                         </li>
-                         @if (!User.IsInRole(SD.Role_HR))
+                        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_App) || User.IsInRole(SD.Role_App_Supervisor) || User.IsInRole(SD.Role_Manager) || User.IsInRole(SD.Role_Multimedia) || User.IsInRole(SD.Role_Multimedia_Supervisor) || User.IsInRole(SD.Role_PPC) || User.IsInRole(SD.Role_PPC_Supervisor) || User.IsInRole(SD.Role_Sales) || User.IsInRole(SD.Role_Sales_Supervisor) || User.IsInRole(SD.Role_SEO) || User.IsInRole(SD.Role_SEO_Supervisor) || User.IsInRole(SD.Role_Social_Media) || User.IsInRole(SD.Role_Social_Media_Supervisor) || User.IsInRole(SD.Role_Web) || User.IsInRole(SD.Role_Web_Supervisor))
                         {
                             @if (!User.IsInRole(SD.Role_Client))
                             {
@@ -263,7 +263,7 @@
                                                 <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="Index">My Tasks <span class="badge badge-pill badge-success">New</span></a>
                                             </li>
                                             <li>
-                                                <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
+                                                <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentByDpt">Tasks by department</a>
                                             </li>
                                             <li>
                                                 <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="Index">My Clients</a>
@@ -354,7 +354,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks</a>
+                                            <a asp-area="Manager" asp-controller="TaskAssigment" asp-action="TaskAssigmentList">Tasks List</a>
                                         </li>
                                         <li>
                                             <a asp-area="Manager" asp-controller="ClientAssigment" asp-action="ActiveClientAssigment">Clients Assignment</a>

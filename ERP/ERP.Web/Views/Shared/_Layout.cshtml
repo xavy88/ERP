@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ERP</title>
+    <title>ERP-System</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- New additions-->
@@ -76,7 +76,7 @@
                     {
                         <li><a class="getstarted scrollto" asp-area="User"  asp-controller="Note" asp-action="Index">Dashboard Area</a></li>
                     }
-                    else
+                    else if (User.IsInRole(SD.Role_Client))
                     {
                         <li><a class="getstarted scrollto" asp-area="Sales"  asp-controller="Order" asp-action="Index">Dashboard Area</a></li>
                     }

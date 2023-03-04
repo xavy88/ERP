@@ -53,7 +53,7 @@
                             <a title="Edit" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-success"><img class="icon-img-crud" src="~/img/icons/crud/edit.png"/> </a>
                             @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_HR))
                             {
-                                <a title="Disapprove" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/close.png"/></a>
+                                <a title="Disapprove" asp-action="Approved" asp-route-id="@obj.Id" class="btn btn-danger"><img class="icon-img-crud" src="~/img/icons/crud/return.png"/></a>
                             }
                         }
                         else
