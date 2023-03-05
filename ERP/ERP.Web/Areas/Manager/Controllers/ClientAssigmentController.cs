@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ERP.Web.Areas.Manager.Controllers
 {
@@ -20,14 +21,65 @@ namespace ERP.Web.Areas.Manager.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            if (User.IsInRole(SD.Role_App_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "App", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_Multimedia_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "Multimedia", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_PPC_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "PPC", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_Sales_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "Sales", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_SEO_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "SEO", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_Social_Media_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "Social Media", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_Web_Supervisor))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Department.Name == "Web", includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else if (User.IsInRole(SD.Role_Admin))
+            {
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true, includeProperties: "Client,Department,JobPosition,Employee");
+                return View(objClientAssigmentList);
+            }
+
+            else
+            {
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.Name);
                 string str = claim.ToString();
                 string ext = str.Remove(0, 60);
 
-                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c=>c.Client.Active == true && c.Employee.WorkEmail == ext,includeProperties: "Client,Department,JobPosition,Employee");
+                IEnumerable<ClientAssigment> objClientAssigmentList = _unitOfWork.ClientAssigment.GetAll(c => c.Client.Active == true && c.Employee.WorkEmail == ext, includeProperties: "Client,Department,JobPosition,Employee");
                 return View(objClientAssigmentList);
-            
+            }
+
         }
         [Authorize]
         public IActionResult ActiveClientAssigment(string dpto)
@@ -63,46 +115,6 @@ namespace ERP.Web.Areas.Manager.Controllers
         [Authorize(Roles = SD.Role_Admin + "," + SD.Role_App_Supervisor + "," + SD.Role_Multimedia_Supervisor + "," + SD.Role_PPC_Supervisor + "," + SD.Role_Sales_Supervisor + "," + SD.Role_SEO_Supervisor + "," + SD.Role_Social_Media_Supervisor + "," + SD.Role_Web_Supervisor)]
         public IActionResult Upsert(int? id)
         {
-            #region deleteme
-            //ClientAssigmentViewModel clientAssigmentVM = new()
-            //{
-            //    ClientAssigment = new(),
-            //    ClientList = _unitOfWork.Client.GetAll(c => c.Active == true).Select(e => new SelectListItem
-            //    {
-            //        Text = e.BusinessName,
-            //        Value = e.Id.ToString(),
-            //    }),
-            //    EmployeeList = _unitOfWork.Employee.GetAll(e => e.Active == true).Select(e => new SelectListItem
-            //    {
-            //        Text = e.Name,
-            //        Value = e.Id.ToString(),
-            //    }),
-            //    DepartmentList = _unitOfWork.Department.GetAll(d => d.Active == true).Select(e => new SelectListItem
-            //    {
-            //        Text = e.Name,
-            //        Value = e.Id.ToString(),
-            //    }),
-            //    JobPositionList = _unitOfWork.JobPosition.GetAll(d => d.Active == true).Select(e => new SelectListItem
-            //    {
-            //        Text = e.Name,
-            //        Value = e.Id.ToString(),
-            //    }),
-            //};
-
-            //if (id == null || id == 0)
-            //{
-            //    //Create
-            //    return View(clientAssigmentVM);
-            //}
-            //else
-            //{
-            //    //Update
-            //    clientAssigmentVM.ClientAssigment = _unitOfWork.ClientAssigment.GetFirstOrDefault(ca => ca.Id == id);
-            //    return View(clientAssigmentVM);
-            //}
-            //return View(clientAssigmentVM);
-            #endregion
-
             if (User.IsInRole(SD.Role_App) || User.IsInRole(SD.Role_App_Supervisor))
             {
                 ClientAssigmentViewModel clientAssigmentVM = new()

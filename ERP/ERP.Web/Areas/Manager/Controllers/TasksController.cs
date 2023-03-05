@@ -19,8 +19,54 @@ namespace ERP.Web.Areas.Manager.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true, includeProperties: "Department,JobPosition");
-            return View(objTasksList);
+            if (User.IsInRole(SD.Role_App_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name=="App", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_Multimedia_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "Multimedia", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_PPC_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "PPC", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_Sales_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "Sales", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_SEO_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "SEO", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_Social_Media_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "Social Media", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else if (User.IsInRole(SD.Role_Web_Supervisor))
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true && e.Department.Name == "Web", includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
+            else
+            {
+                IEnumerable<Tasks> objTasksList = _unitOfWork.Tasks.GetAll(e => e.Active == true, includeProperties: "Department,JobPosition");
+                return View(objTasksList);
+            }
+
         }
 
         //GET
